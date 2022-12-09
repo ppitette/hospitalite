@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
+#[UniqueEntity(fields: 'courriel', message: 'There is already an account with this email')]
 class Personne
 {
     #[ORM\Id]
@@ -44,6 +47,7 @@ class Personne
     private ?bool $lrCourriel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Email(message: "Le courriel '{{ value }}' n\'est pas valide.")]
     private ?string $courriel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -59,18 +63,23 @@ class Personne
     private ?\DateTimeImmutable $dateDeces = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 2050)]
     private ?int $engHosp = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 2050)]
     private ?int $engEgl = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 2050)]
     private ?int $pPele = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 100)]
     private ?int $nbPele = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 2050)]
     private ?int $dPele = null;
 
     #[ORM\Column]
@@ -103,7 +112,7 @@ class Personne
     }
 
     /**
-     * Calcul de l'age à une date indiquée.
+     * Calcul de l'age à une date précisée.
      */
     public function getAgeDate(\DateTime $date): int
     {
@@ -414,7 +423,7 @@ class Personne
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
+    public function setDeletedAt(\DateTimeImmutable $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
 
