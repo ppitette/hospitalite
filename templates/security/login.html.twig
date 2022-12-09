@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block title %}S'authentifier{% endblock %}
+
+{% block body %}
+    <main class="container mt-4">
+        {% include "_partials/_flashbag.html.twig" %}
+
+        <div class="card mt-4 mx-auto w-50">
+            <div class="card-header">
+                <h1 class="h3 my-3">Authentification</h1>
+            </div>
+
+            <div class="card-body">
+                <form class="login-form" method="post">
+
+                    <label for="inputEmail" class="visually-hidden"></label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control login-option" placeholder="Courriel" required autofocus>
+
+                    <label for="inputPassword" class="visually-hidden"></label>
+                    <input type="password" name="password" id="inputPassword" class="form-control login-option" placeholder="Mot de passe" required>
+                    
+                    <div class="form-group my-3">
+                        <div class="form-check">
+                            <input class="form-check-input login-option" type="checkbox" id="remember_me" name="_remember_me">
+                            <label class="form-check-label" for="remember_me"> Se souvenir de moi</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">Se connecter</button>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <div class="hstack">
+                    <div>
+                        <a class="text-decoration-none" href="{{ path('app.forgot_password') }}">Mot de passe oublié ?</a>
+                    </div>
+                    <div class="ms-auto">Pas de compte ?&nbsp;
+                        <a class="text-decoration-none" href="{{ path('app.register') }}">S'enregistrer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

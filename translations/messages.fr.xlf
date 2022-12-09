@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="label.email">
+                <source>label.email</source>
+                <target>Adresse Email</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="label.repeat.password">
+                <source>label.repeat.password</source>
+                <target>Confirmer</target>
+            </trans-unit>
+            <trans-unit id="label.agree.terms">
+                <source>label.agree.terms</source>
+                <target>J'accepte les conditions d'utilisation de ce site.</target>
+            </trans-unit>
+            <trans-unit id="label.nom">
+                <source>label.nom</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="label.prenom">
+                <source>label.prenom</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="label.commune">
+                <source>label.commune</source>
+                <target>Commune</target>
+            </trans-unit>
+            <trans-unit id="label.telephone">
+                <source>label.telephone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

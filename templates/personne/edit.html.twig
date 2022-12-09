@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ personne.prenom }} {{ personne.nom }} {% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <p class="h2">{{ personne.prenom }} {{ personne.nom }}</p>
+        {{ include('personne/_form.html.twig', {button: 'Enregistrer'}) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{{ form_start(form) }}
+    <div class="row mb-2">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header"><strong>Affectation</strong></div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text">Groupe</span>
+                        {{ form_widget(form.groupe) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header"><strong>Transport</strong></div>
+                <div class="card-body">
+                    <div class="input-group mb-1">
+                        <span class="input-group-text">Car</span>
+                        {{ form_widget(form.trnsCar) }}
+                    </div>
+                    <div class="input-group mb-1">
+                        <span class="input-group-text">Siège</span>
+                        {{ form_widget(form.trnsSiege) }}
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Place</span>
+                        {{ form_widget(form.trnsPlace) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header"><strong>Hébergement</strong></div>
+                <div class="card-body">
+                    <p><strong>Préférence : </strong>{{ params.getLibelle('hotel', inscription.prefHeberg) }}</p>
+                    {% if inscription.hebHosp %}
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Hôtel</span>
+                            {{ form_widget(form.hebHotel) }}
+                            {# {% do form.hebHosp.setRendered() %} #}
+                            {% do form.hebPerso.setRendered() %}
+                        </div>
+                        {{ form_row(form.hebSingle, {
+                            label: 'Chambre seul',
+                            label_attr: {
+                                class: 'checkbox-inline'
+                            }
+                        }) }}
+                        <div class="input-group">
+                            <span class="input-group-text">Chambre</span>
+                            {{ form_widget(form.hebChambre) }}
+                        </div>
+                    {% else %}
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Heb. Perso</span>
+                            {{ form_widget(form.hebPerso) }}
+                            {# {% do form.hebHosp.setRendered() %} #}
+                            {% do form.hebSingle.setRendered() %}
+                            {% do form.hebHotel.setRendered() %}
+                            {% do form.hebChambre.setRendered() %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {# <pre>{{ dump(form.hebHosp) }}</pre> #}
+    <button class="btn btn-primary">{{ button|default('valeur_defaut') }}</button>
+{{ form_end(form) }}

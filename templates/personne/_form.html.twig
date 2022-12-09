@@ -1,0 +1,142 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-2">
+            {{ form_row(form.genre, {
+                label: 'Genre'
+            }) }}
+        </div>
+        <div class="col-1">
+            {{ form_row(form.civilite, {
+                label: 'Civilité'
+            }) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.nom, {
+                label: 'Nom'
+            }) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.prenom, {
+                label: 'Prénom'
+            }) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.nomNaiss, {
+                label: 'Nom de naissance'
+            }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            {{ form_row(form.dateNaiss, {
+                label: 'Date de naissance'
+            }) }}
+        </div>
+        <div class="col-2 mb-3">
+            {{ form_label(form.dateDeces, 'Personne décédée ?') }}
+            <div class="input-group">
+                <div class="input-group-text">
+                    {{ form_widget(form.decede) }}
+                </div>
+                {{ form_widget(form.dateDeces) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            {{ form_row(form.telephone, {
+                label: 'Téléphone'
+            }) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.mobile, {
+                label: 'Mobile'
+            }) }}
+        </div>
+        <div class="col-4 mb-3">
+            {{ form_label(form.courriel, 'Courriel') }}
+            <div class="input-group">
+                {{ form_widget(form.courriel) }}
+                <span class="input-group-text">
+                    {{ form_widget(form.lrCourriel) }}Liste rouge
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th colspan="3">Pèlerinages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ form_row(form.pPele, {
+                                label: 'Premier'
+                            }) }}
+                        </td>
+                        <td>
+                            {{ form_row(form.nbPele, {
+                                label: 'Nombre'
+                            }) }}
+                        </td>
+                        <td>
+                            {{ form_row(form.dPele, {
+                                label: 'Dernier'
+                            }) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th colspan="2">Engagements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ form_row(form.engHosp, {
+                                label: 'en Hospitalité'
+                            }) }}
+                        </td>
+                        <td>
+                            {{ form_row(form.engEgl, {
+                                label: 'en Église'
+                            }) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            {{ form_row(form.medical, {
+                label: 'Professionel de santé'
+            }) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.medicalAutre, {
+                label: 'Complément'
+            }) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.isReferent, {
+                label: 'Hospitalier référent',
+                label_attr: {
+                    class: 'checkbox-inline'
+                }
+            }) }}
+        </div>
+    </div>
+    <div class="my-3">
+        <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}

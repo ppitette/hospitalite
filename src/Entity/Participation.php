@@ -43,6 +43,14 @@ class Participation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $hebergement = null;
 
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Personne $personne = null;
+
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Pelerinage $pelerinage = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +172,30 @@ class Participation
     public function setHebergement(?string $hebergement): self
     {
         $this->hebergement = $hebergement;
+
+        return $this;
+    }
+
+    public function getPersonne(): ?Personne
+    {
+        return $this->personne;
+    }
+
+    public function setPersonne(?Personne $personne): self
+    {
+        $this->personne = $personne;
+
+        return $this;
+    }
+
+    public function getPelerinage(): ?Pelerinage
+    {
+        return $this->pelerinage;
+    }
+
+    public function setPelerinage(?Pelerinage $pelerinage): self
+    {
+        $this->pelerinage = $pelerinage;
 
         return $this;
     }

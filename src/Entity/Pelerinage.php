@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PelerinageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,18 @@ class Pelerinage
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $remarque = null;
+
+    #[ORM\OneToMany(mappedBy: 'pelerinage', targetEntity: Participation::class)]
+    private Collection $participations;
+
+    #[ORM\OneToMany(mappedBy: 'pelerinage', targetEntity: Inscription::class)]
+    private Collection $inscriptions;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -125,6 +139,66 @@ class Pelerinage
     public function setRemarque(?string $remarque): self
     {
         $this->remarque = $remarque;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participation>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations->add($participation);
+            $participation->setPelerinage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getPelerinage() === $this) {
+                $participation->setPelerinage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->setPelerinage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): self
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getPelerinage() === $this) {
+                $inscription->setPelerinage(null);
+            }
+        }
 
         return $this;
     }

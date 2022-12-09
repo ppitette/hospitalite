@@ -1,0 +1,95 @@
+{{ form_start(form) }}
+    <div class="row mb-3">
+        <div class="col-2">Remise</div>
+        <div class="col-6">
+            {{ form_widget(form.remise, {
+                attr: {
+                    placeholder: 'Point de remise'
+                }
+            }) }}
+            {{ form_help(form.remise) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">Complément</div>
+        <div class="col-6">
+            {{ form_widget(form.compLoc, {
+                attr: {
+                    placeholder: 'Complément'
+                }
+            }) }}
+            {{ form_help(form.compLoc) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">Voie</div>
+        <div class="col-1">
+            {{ form_widget(form.numVoie, {
+                attr: {
+                    placeholder: 'Numéro'
+                }
+            }) }}
+            {{ form_help(form.numVoie) }}
+        </div>
+        <div class="col-1">
+            {{ form_widget(form.typeVoie) }}
+            {{ form_help(form.typeVoie) }}
+        </div>
+        <div class="col-4">
+            {{ form_widget(form.nomVoie, {
+                attr: {
+                    placeholder: 'Nom de la voie'
+                }
+            }) }}
+            {{ form_help(form.nomVoie) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">Complément</div>
+        <div class="col-6">
+            {{ form_widget(form.compVoie, {
+                attr: {
+                    placeholder: 'Complément'
+                }
+            }) }}
+            {{ form_help(form.compVoie) }}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2">Commune</div>
+        <div class="col-1">
+            {{ form_widget(form.cPostal) }}
+            {{ form_help(form.cPostal) }}
+        </div>
+        <div class="col-3">
+            {{ form_widget(form.commune) }}
+            {{ form_help(form.commune) }}
+        </div>
+        <div class="col-1">
+            {{form_widget(form.insee) }}
+            {{ form_help(form.insee) }}
+        </div>
+        <div class="col-3">
+            {{ form_widget(form.pays) }}
+            {{ form_help(form.pays) }}
+        </div>
+    </div>
+    <h2 class="border-bottom mb-3"></h2>
+    <div class="row mb-3">
+        <div class="col-4">
+            {{ form_widget(form.diocese) }}
+            {{ form_help(form.diocese) }}
+        </div>
+        <div class="col-4">
+            {{ form_widget(form.secteur) }}
+            {{ form_help(form.secteur) }}
+        </div>
+        <div class="col-4">
+            {{ form_widget(form.paroisse) }}
+            {{ form_help(form.paroisse) }}
+        </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
+    {{ form_rest(form) }}
+{{ form_end(form) }}

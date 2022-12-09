@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AdresseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,6 +60,14 @@ class Adresse
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8, nullable: true)]
     private ?string $lng = null;
+
+    #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Personne::class)]
+    private Collection $personnes;
+
+    public function __construct()
+    {
+        $this->personnes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -242,5 +252,78 @@ class Adresse
         $this->lng = $lng;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Personne>
+     */
+    public function getPersonnes(): Collection
+    {
+        return $this->personnes;
+    }
+
+    public function addPersonne(Personne $personne): self
+    {
+        if (!$this->personnes->contains($personne)) {
+            $this->personnes->add($personne);
+            $personne->setAdresse($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonne(Personne $personne): self
+    {
+        if ($this->personnes->removeElement($personne)) {
+            // set the owning side to null (unless already changed)
+            if ($personne->getAdresse() === $this) {
+                $personne->setAdresse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLibAdresse(): string
+    {
+        $adresse = '';
+
+        if ($this->remise) {
+            $adresse .= $this->remise."\n";
+        }
+
+        if ($this->compLoc) {
+            $adresse .= $this->compLoc."\n";
+        }
+
+        if ($this->numVoie) {
+            $adresse .= $this->numVoie.' ';
+        }
+
+        if ($this->typeVoie) {
+            $adresse .= $this->typeVoie.' ';
+        }
+
+        if ($this->nomVoie) {
+            $adresse .= $this->nomVoie."\n";
+        }
+
+        if ($this->compVoie) {
+            $adresse .= $this->compVoie."\n";
+        }
+
+        if ($this->cPostal) {
+            $adresse .= $this->cPostal.' ';
+        }
+
+        if ($this->commune) {
+            $adresse .= $this->commune;
+        }
+
+        if ($this->pays && 'France' !== $this->pays) {
+            $adresse .= "\n".$this->pays;
+        }
+
+        return $adresse;
     }
 }

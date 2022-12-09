@@ -234,6 +234,12 @@ class Inscription
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $currentPlace = null;
 
+    #[ORM\OneToOne(mappedBy: 'inscription', cascade: ['persist', 'remove'])]
+    private ?Personne $personne = null;
+
+    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
+    private ?Pelerinage $pelerinage = null;
+
     public function __construct()
     {
         $this->entite = 0;
@@ -989,6 +995,40 @@ class Inscription
     public function setCurrentPlace(?string $currentPlace): self
     {
         $this->currentPlace = $currentPlace;
+
+        return $this;
+    }
+
+    public function getPersonne(): ?Personne
+    {
+        return $this->personne;
+    }
+
+    public function setPersonne(?Personne $personne): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($personne === null && $this->personne !== null) {
+            $this->personne->setInscription(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($personne !== null && $personne->getInscription() !== $this) {
+            $personne->setInscription($this);
+        }
+
+        $this->personne = $personne;
+
+        return $this;
+    }
+
+    public function getPelerinage(): ?Pelerinage
+    {
+        return $this->pelerinage;
+    }
+
+    public function setPelerinage(?Pelerinage $pelerinage): self
+    {
+        $this->pelerinage = $pelerinage;
 
         return $this;
     }

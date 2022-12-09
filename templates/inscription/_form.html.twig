@@ -1,0 +1,251 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-1">
+            {{ form_row(form.numInsc, {
+                label: 'NumSDP'
+            }) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.inscritAt, {
+                label: 'Date d\'inscription'
+            }) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.entite, {
+                label: 'Entité'
+            }) }}
+        </div>
+        <div class="col-4">
+            {{ form_label(form.conjoint, 'Couple') }}
+            <div class="input-group">
+                <span class="input-group-text">
+                    {{ form_widget(form.couple, {
+                        label: false,
+                    }) }}
+                </span>
+                {{ form_widget(form.conjoint, {
+                    attr: {
+                        placeholder: 'Conjoint présent au pèlerinage'
+                    }
+                }) }}
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                {{ form_label(form.situation, 'Situation') }}
+                {{ form_widget(form.situation) }}
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">Voyage</div>
+                <div class="card-body">
+                    {{ form_row(form.voyAller, {
+                        label: 'Aller',
+                        label_attr: {
+                            class: 'checkbox-inline'
+                        }
+                    }) }}
+                    {{ form_row(form.voyRetour, {
+                        label: 'Retour',
+                        label_attr: {
+                            class: 'checkbox-inline'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">Statut</div>
+                <div class="card-body">
+                    {{ form_row(form.nouveau, {
+                        label: 'Nouveau',
+                        label_attr: {
+                            class: 'checkbox-inline'
+                        }
+                    }) }}
+                    {{ form_row(form.horsEffectif, {
+                        label: 'Hors effectif',
+                        label_attr: {
+                            class: 'checkbox-inline'
+                        }
+                    }) }}
+                    {{ form_row(form.listeAtt, {
+                        label: 'Liste d\'attente',
+                        label_attr: {
+                            class: 'checkbox-inline'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">Connu Hospitalité</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group">
+                                {{ form_label(form.connuHosp, 'J\'ai connu l\'Hospitalité...') }}
+                                {{ form_widget(form.connuHosp) }}
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group">
+                                {{ form_label(form.connuHospQui, 'Qui ? / Laquelle ?') }}
+                                {{ form_widget(form.connuHospQui) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">Hébergement</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">                
+                            <div>
+                                {{ form_row(form.hebHosp, {
+                                    label: 'Hébergement Hospitalité',
+                                    label_attr: {
+                                        class: 'checkbox-inline'
+                                    }
+                                }) }}
+                                {{ form_row(form.hebSingle, {
+                                    label: 'Chambre seul',
+                                    label_attr: {
+                                        class: 'checkbox-inline'
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                        
+                            <div class="col-2">
+                                <div class="form-group">
+                                    {{ form_label(form.prefHeberg, 'Préférence') }}
+                                    {{ form_widget(form.prefHeberg) }}
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    {{ form_label(form.partageChambre, 'Partage sa chambre...') }}
+                                    {{ form_widget(form.partageChambre) }}
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group">
+                                    {{ form_label(form.partageChambreNom, 'Avec') }}
+                                    {{ form_widget(form.partageChambreNom) }}
+                                </div>
+                            </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group">
+                                <span class="input-group-text">Hébergement personnel</span>
+                                {{ form_widget(form.hebPerso, {
+                                    attr: {
+                                        placeholder: 'Hôtel personnel'
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header">Services à Lourdes</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form_label(form.serviceChambre, 'Préférence chambre') }}
+                            {{ form_widget(form.serviceChambre) }}
+                        </div>
+                        <div class="col-3">
+                            {{ form_row(form.porte, {
+                                label: 'Porte',
+                                label_attr: {
+                                    class: 'checkbox-inline'
+                                }
+                            }) }}
+                            {{ form_row(form.voiture, {
+                                label: 'Voiture',
+                                label_attr: {
+                                    class: 'checkbox-inline'
+                                }
+                            }) }}
+                        </div>
+                        <div class="col-3">
+                            {{ form_row(form.gardeNuit, {
+                                label: 'Nuit',
+                                label_attr: {
+                                    class: 'checkbox-inline'
+                                }
+                            }) }}
+                            {{ form_row(form.piscine, {
+                                label: 'Piscine',
+                                label_attr: {
+                                    class: 'checkbox-inline'
+                                }
+                            }) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header">Animation</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            {{ form_row(form.animation, {
+                                label: 'Animation',
+                                label_attr: {
+                                    class: 'checkbox-inline'
+                                }
+                            }) }}
+                        </div>
+                        <div class="col-9">
+                            {{ form_label(form.instrument, 'Instrument de musique') }}
+                            {{ form_widget(form.instrument) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="card">
+                <div class="card-header">Tenue</div>
+                <div class="card-body">
+                    {{ form_row(form.tenue, {
+                        label: 'Je dispose de ma propre tenue',
+                        label_attr: {
+                            class: 'checkbox-inline'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            {{ form_row(form.personneUrgence, {
+                label: 'Personne à prévenir en cas d\'urgence'
+            }) }}
+        </div>
+    </div>
+    <button class="btn btn-primary">{{ button|default('valeur_defaut') }}</button>
+{{ form_end(form) }}

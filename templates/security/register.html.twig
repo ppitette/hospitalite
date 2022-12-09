@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {{ encore_entry_link_tags('register') }}
+{% endblock %}
+
+{% block title %}S'enregistrer{% endblock %}
+
+{% block body %}
+    <main class="container mt-4">
+        {# {%  for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {%  endfor %} #}
+        {% include "_partials/_flashbag.html.twig" %}
+
+        <div class="card mt-4 mx-auto w-50">
+            <div class="card-header">
+                <h1 class="h3 my-3">Créer un compte utilisateur</h1>
+            </div>
+
+            <div class="card-body">
+                <form class="register" method="post">
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'register-email register-option', 'placeholder': 'Courriel'}}) }}
+
+                    {{ form_widget(registrationForm.password.first, {'attr': {'class': 'register-pswd-first register-option', 'placeholder': 'Mot de passe'}}) }}
+
+                    {{ form_widget(registrationForm.password.second, {'attr': {'class': 'register-pswd-second register-option', 'placeholder': 'Confirmer'}}) }}
+
+                    <div class="mb-3">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">S'inscrire</button>
+                    </div>
+
+                    {{ form_rest(registrationForm) }}
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

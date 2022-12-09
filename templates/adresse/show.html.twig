@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresse{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="h4 row">
+            <div class="col-2">-</div>
+            <div class="col-10">-</div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <div class="h5 card-header">Affichage</div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-12">{{ adresse.libAdresse | nl2br }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                {%  if adresse.personnes|length > 1 %}
+                    <div class="card">
+                        <p class="h5 card-header">Même adresse</p>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="row">
+                                    {% for personne in adresse.personnes %}
+                                        <div class="col-12">{{ personne.nom }} {{ personne.prenom }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <p class="h5 card-header">Diocèse</p>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-8">{{ adresse.diocese ?: '-' }}</div>
+                                <div class="col-8">{{ adresse.secteur ?: '-' }}</div>
+                                <div class="col-8">Paroisse {{ adresse.paroisse ?: '-' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-8">
+                <div class="card">
+                    <div class="h5 card-header">Adresse</div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-2">Remise</div>
+                                <div class="col-10">{{ adresse.remise ?: '-' }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">compLoc</div>
+                                <div class="col-10">{{ adresse.compLoc ?: '-' }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">Voie</div>
+                                <div class="col-2">{{ adresse.numVoie ?: '-' }}</div>
+                                <div class="col-2">{{ adresse.typeVoie ?: '-' }}</div>
+                                <div class="col-4">{{ adresse.nomVoie ?: '-' }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2">Commune</div>
+                                <div class="col-2">{{ adresse.cPostal ?: '-' }}</div>
+                                <div class="col-6">{{ adresse.commune ?: '-' }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">Pays</div>
+                                <div class="col-8">{{ adresse.pays ?: '-' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

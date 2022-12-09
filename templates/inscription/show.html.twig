@@ -1,0 +1,204 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row mb-2">
+            {# <pre> {{ dump(app.request.headers.get('referer')) }} </pre> #}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>{{ inscrit.personne.nom }} {{ inscrit.personne.prenom }}</strong>
+                        {% if inscrit.nouveau %}
+                            <span class="badge bg-primary text-white">Premier pèlerinage</span>
+                        {% endif %}
+                        {% if inscrit.horsEffectif %}
+                            <span class="badge bg-primary text-white">Hors effectif</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body pb-0">
+                        <p>{{ inscrit.personne.adresse.libAdresse|nl2br }}</p>
+                        {% if inscrit.personne.adresse.diocese != 'Diocèse d\'Évreux' %}
+                            <p><strong>{{ inscrit.personne.adresse.diocese }}</strong></p>
+                        {% else %}
+                            <p>Paroisse {{ inscrit.personne.adresse.paroisse }}</p>
+                        {% endif %}
+                        <dl class="row">
+                            {% if inscrit.personne.telephone %}
+                                <dt class="col-3">Téléphone</dt>
+                                <dd class="col-8">{{ inscrit.personne.telephone ? inscrit.personne.telephone|phone : '-' }}</dd>
+                            {% endif %}
+                            {% if inscrit.personne.mobile %}
+                                <dt class="col-3">Mobile</dt>
+                                <dd class="col-8">{{ inscrit.personne.mobile ? inscrit.personne.mobile|phone : '-' }}</dd>
+                            {% endif %}
+                            {% if inscrit.personne.courriel %}
+                                <dt class="col-3">Courriel</dt>
+                                <dd class="col-8">{{ inscrit.personne.courriel ? : '-' }}</dd>
+                            {% endif %}
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <dov class="col-5">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Dossier n°{{ inscrit.numInsc }}</strong>
+                        {% if inscrit.listeAtt %}
+                            <span class="badge bg-danger text-white">Liste d'attente</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body pb-0">
+                        <dl class="row">
+                            <dt class="col-3">Entité</dt>
+                            <dd class="col-9">{{ params.getLibelle('entite', inscrit.entite) }}</dd>
+                            <dt class="col-3">Voyage</dt>
+                            <dd class="col-9">{{ inscrit.voyage }}</dd>
+
+                            {% if inscrit.couple %}
+                                <dt class="col-3">Conjoint</dt>
+                                <dd class="col-9">{{ inscrit.conjoint }}</dd>
+                            {% endif %}
+
+                            {% if inscrit.hebHosp %}
+                                <dt class="col-3">Héb. Hosp.</dt>
+                                <dd class="col-9">
+                                    {{ params.getLibelle('hotel', inscrit.prefHeberg) }}
+                                    {% if inscrit.hebSingle %}(S) {% endif %}
+                                </dd>
+                            {% else %}
+                                <dt class="col-3">Héb. Perso.</dt>
+                                <dd class="col-9">
+                                    * 
+                                    {{ inscrit.hebPerso }}
+                                    {% if inscrit.hebSingle %}(S) {% endif %}
+                                </dd>
+                            {% endif %}
+
+                            <dt class="col-3">Situation</dt>
+                            <dd class="col-9">{{ params.getLibelle('situat', inscrit.situation) }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </dov>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header"><strong>Jalonnement</strong></div>
+                    <div class="card-body pb-0">
+                        <dl class="row">
+                            <dt class="col-6">Inscription</dt>
+                            <dd class="col-6">{{ inscrit.inscritAt ? inscrit.inscritAt|date('d/m/Y') : '-' }}</dd>
+                            <dt class="col-6">Envoi dossier</dt>
+                            <dd class="col-6">{{ inscrit.envoiAt ? inscrit.envoiAt|date('d/m/Y') : '-' }}</dd>
+                            <dt class="col-6">Retour dossier</dt>
+                            <dd class="col-6">{{ inscrit.retourAt ? inscrit.retourAt|date('d/m/Y') : '-' }}</dd>
+                            <dt class="col-6">Validation</dt>
+                            <dd class="col-6">{{ inscrit.valideAt ? inscrit.valideAt|date('d/m/Y') : '-' }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header"><strong>Connu Hospitalité</strong></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">{{ params.getLibelle('connu', inscrit.connuHosp) }}</div>
+                            <div class="col-8">{{ inscrit.connuHospQui }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <div class="card-header"><strong>Pref. Chambre</strong></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">{{ params.getLibelle('chserv', inscrit.serviceChambre) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header"><strong>Service</strong></div>
+                    <div class="card-body pb-0">
+                        <dl class="row">
+                            <dt class="col-3">Porte</dt>
+                            <dd class="col-3">{{ inscrit.porte ? ': Oui' : ': Non' }}</dd>
+                            <dt class="col-3">Voiture</dt>
+                            <dd class="col-3">{{ inscrit.voiture ? ': Oui' : ': Non' }}</dd>
+                            <dt class="col-3">Garde de nuit</dt>
+                            <dd class="col-3">{{ inscrit.gardeNuit ? ': Oui' : ': Non' }}</dd>
+                            <dt class="col-3">Serv. piscines</dt>
+                            <dd class="col-3">{{ inscrit.piscine ? ': Oui' : ': Non' }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <div class="card">
+                    <div class="card-header"><strong>Animation</strong></div>
+                    <div class="card-body">
+                        {{ inscrit.animation ? 'Oui' : 'Non' }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header"><strong>Instrument</strong></div>
+                    <div class="card-body">
+                        {{ inscrit.instrument ? inscrit.instrument : 'Non' }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header"><strong>Tenue</strong></div>
+                    <div class="card-body">
+                        {{ inscrit.tenue ? 'Je dispose de ma propre tenue' : 'Non' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header"><strong>Personne à prévenir en cas d'urgence</strong></div>
+                    <div class="card-body">
+                        {{ inscrit.personneUrgence}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info">Retour</a>
+            <a href="{{ path('insc.edit', {id: inscrit.id}) }}" class="btn btn-primary">Éditer</a>
+            
+            {% if inscrit.entite == 0 or inscrit.entite == 1 %}
+                <a href="{{ path('doc.doss_hosp', {id: inscrit.id}) }}" class="btn btn-success">Dossier</a>
+            {% elseif inscrit.entite == 2 %}
+                <a href="{{ path('doc.doss_elyc', {id: inscrit.id}) }}" class="btn btn-success">Dossier</a>
+            {% elseif inscrit.entite == 3 %}
+                <a href="{{ path('doc.doss_lyce', {id: inscrit.id}) }}" class="btn btn-success">Dossier</a>
+            {% elseif inscrit.entite == 4 %}
+                {% set stat = params.getCleAbr('etat', inscrit.currentPlace) %}
+                {% if stat < 3 %}
+                    <a href="{{ path('doc.doss_pmal', {id: inscrit.id}) }}" class="btn btn-success">Dossier</a>
+                {% elseif stat == 3 %}
+                    <a href="{{ path('doc.acpt_pmal', {id: inscrit.id}) }}" class="btn btn-success">Acceptation</a>
+                {% endif %}
+            {% endif %}
+
+            {% for transition in workflow_transitions(inscrit) %}
+                <a href="{{ path('insc.next', {id: inscrit.id, transition: transition.name}) }}" class="btn btn-info" role="button">{{ transition.name }}</a>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

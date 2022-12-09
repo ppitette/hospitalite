@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{parent()}}
+    {{ encore_entry_link_tags('inscription') }}
+{% endblock %}
+
+{% block title %}Inscriptions{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+    <div class="container">
+        <div class="row mx-4"> 
+            {% set debut = date(params.getComplement('pele', 0)) %}
+            <div class="text-right">
+                <h2>{{ params.getLibelle('pele', 0) }} : Personnes inscrites au pèlerinage</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center"></th>
+                            <th colspan="2" class="text-center">Dates</th>
+                            <th class="text-center">Nom et prénom</th>
+                            <th class="text-center">D Naiss</th>
+                            <th class="text-center">Adresse</th>
+                            <th class="text-center">Contact</th>
+                            <th class="text-center">Dossier</th>
+                            {# <th class="text-center">Action</th> #}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inscrit in inscrits %}
+                        {% set stat = params.getCleAbr('etat', inscrit.currentPlace) %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('insc.show', {id: inscrit.id}) }}" class="btn btn-outline-primary btn-sm">{{ inscrit.numInsc }}</a>
+                                    {% if inscrit.listeAtt %}
+                                        <img src="/images/gyrophare.gif" alt="LA" class="text-center" style="width: 15px;" id="logo"/>
+                                    {% endif %}
+                                    {% if inscrit.horsEffectif %}
+                                        <img src="/images/jeune.gif" alt="HE" class="text-center" style="width: 25px;" id="logo"/>
+                                    {% endif %}
+                                </td>
+                                <td>{{ params.getAbrege('entite', inscrit.entite) }}</td>
+                                <td>I<br>E<br>R</td>
+                                <td>
+                                    {{ inscrit.inscritAt|date('d/m/Y') }}<br>
+                                    {% if inscrit.envoiAt %}
+                                        {{ inscrit.envoiAt|date('d/m/Y') }}<br>
+                                        {% if inscrit.retourAt %}
+                                            {{ inscrit.retourAt|date('d/m/Y') }}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ inscrit.personne.civilite }} {{ inscrit.personne.nom }} {{ inscrit.personne.prenom }}
+                                    {% if inscrit.couple %}
+                                        </br><small>{{ inscrit.conjoint }}</small>
+                                    {% endif %}
+                                </td>
+                                {% if inscrit.personne.dateNaiss is empty %}
+                                    <td></td>
+                                {% else %}
+                                    <td>
+                                        {{ inscrit.personne.dateNaiss|date('d/m/Y') }}
+                                        </br>
+                                        {{ inscrit.personne.ageDate(debut) }} ans
+                                    </td>
+                                {% endif %}
+                                <td>{{ inscrit.personne.adresse.libAdresse|nl2br }}</td>
+                                <td>
+                                    {{ inscrit.personne.telephone ? inscrit.personne.telephone|phone : ' ' }}<br>
+                                    {{ inscrit.personne.mobile ? inscrit.personne.mobile|phone : ' ' }}<br>
+                                    {{ inscrit.personne.courriel }}
+                                </td>
+                                {# <td><span id="{{ params.getAbrege('etat', stat) }}" class="badge badge-light">{{ params.getLibelle('etat', stat) }}</span></td> #}
+                                <td>
+                                    {% if stat == '0' %}
+                                        <span class="badge bg-light text-dark">Enregistré</span>
+                                    {% elseif stat == '1' %}
+                                        <span class="badge bg-warning text-dark">Dossier envoyé</span>
+                                    {% elseif stat == '2' %}
+                                        <span class="badge bg-info text-dark">Dossier retourné</span>
+                                    {% elseif stat == '3' %}
+                                        <span class="badge bg-primary">Inscription validée</span>
+                                    {% elseif stat == '4' %}
+                                        <span class="badge bg-danger">Inscription refusée</span>
+                                    {% elseif stat == '5' %}
+                                        <span class="badge bg-success">Inscription confirmée</span>
+                                    {% elseif stat == '6' %}
+                                        <span class="badge bg-secondary">Désisté</span>
+                                    {% elseif stat == '7' %}
+                                        <span class="badge bg-success">Présent</span>
+                                    {% else %}
+                                        <span>{{ stat }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination mt-3">
+                {{  knp_pagination_render(inscrits) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

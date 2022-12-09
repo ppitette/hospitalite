@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscriptions{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mx-4">
+            {% set debut = date(params.getComplement('pele', 0)) %}
+            <div class="text-right">
+                <h1>{{ params.getLibelle('pele', 0) }} - Personnes Malades</h1>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Dossier</th>
+                            <th class="text-center">Nom et prénom</th>
+                            <th class="text-center">Age</th>
+                            <th class="text-center">S</th>
+                            <th class="text-center">Nb</th>
+                            <th class="text-center">Dern</th>
+                            <th class="text-center">Voy</th>
+                            <th class="text-center">Couple</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for inscrit in inscrits %}
+                        {% set stat = params.getCleAbr('etat', inscrit.currentPlace) %}
+                        <tr>
+                            <td>{{ inscrit.numInsc }}
+                                {% if inscrit.listeAtt %}
+                                    <img src="/images/gyrophare.gif" alt="LA" class="text-center" style="width: 15px;" id="logo"/>
+                                {% endif %}
+                                {% if inscrit.horsEffectif %}
+                                    <img src="/images/jeune.gif" alt="HE" class="text-center" style="width: 25px;" id="logo"/>
+                                {% endif %}
+                                {% if inscrit.personne.medical > 0 %}
+                                    <img src="/images/croix_rouge.gif" alt="EM" class="text-center" style="width: 25px;" id="logo"/>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if stat == '0' %}
+                                    <span class="badge bg-light text-dark">Enregistré</span>
+                                {% elseif stat == '1' %}
+                                    <span class="badge bg-warning text-dark">Dossier envoyé</span>
+                                {% elseif stat == '2' %}
+                                    <span class="badge bg-info text-dark">Dossier retourné</span>
+                                {% elseif stat == '3' %}
+                                    <span class="badge bg-primary">Inscription validée</span>
+                                {% elseif stat == '4' %}
+                                    <span class="badge bg-danger">Inscription refusée</span>
+                                {% elseif stat == '5' %}
+                                    <span class="badge bg-success">Inscription confirmée</span>
+                                {% elseif stat == '6' %}
+                                    <span class="badge bg-secondary">Désisté</span>
+                                {% elseif stat == '7' %}
+                                    <span class="badge bg-success">Présent</span>
+                                {% else %}
+                                    <span>{{ stat }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ inscrit.personne.nom }} {{ inscrit.personne.prenom }}</td>
+                            {# Calcul de l'age au 1er jour du pèlerinage : date(pele.debut) - date(inscrit.personne.dateNaiss) #}
+                            <td class="text-center">{{ inscrit.personne.dateNaiss is empty ? "" : inscrit.personne.ageDate(debut) }}</td>
+                            <td class="text-center">
+                                {% if inscrit.nouveau and inscrit.personne.ageDate(debut) <= 25 %}
+                                    NJ
+                                {% elseif not inscrit.nouveau and inscrit.personne.ageDate(debut) <= 25 %}
+                                    J
+                                {% elseif inscrit.nouveau and not inscrit.personne.ageDate(debut) <= 25 %}
+                                    N
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td class="text-end">{{ inscrit.personne.nbPele }}</td>
+                            <td class="text-end">{{ inscrit.personne.dPele }}</td>
+                            <td class="text-center">{{ inscrit.voyage }}</td>
+                            {% if inscrit.couple %}
+                                <td>{{ inscrit.conjoint }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                            <td class="text-center">
+                                {% if is_granted('ROLE_LECT') %}
+                                    <a href="{{ path('insc.show', {id: inscrit.id}) }}" class="btn btn-success btn-sm" role="button">Inscription</a>
+                                    <a href="{{ path('insc.show_aff', {id: inscrit.id}) }}" class="btn btn-warning btn-sm" role="button">Affectation</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination mt-3">
+                {{  knp_pagination_render(inscrits) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

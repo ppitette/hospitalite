@@ -1,0 +1,132 @@
+{# liste/deces.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title 'Liste des Décès' %}
+
+{% block body %}
+    {# set max = liste_deces_tabs #}
+    
+    {% set anref = 'now' | date('Y') %}
+
+    <div class="container">
+        <h3>Personnes malades et Hospitaliers décédés</h3>
+
+        <ul class="nav nav-tabs" id="tabDeces" role="tablist">
+            {% for i in range(0, max) %}
+                {% set an = anref - i %}
+                {% if i < max - 1 %}
+                    <li class="nav-item" role="liste">
+                        <button class="nav-link {% if i == 0 %}active{% endif %}" id="t{{ an }}-tab" data-bs-toggle="tab" data-bs-target="#t{{ an }}" type="button" role="tab" aria-controls="t{{ an }}" aria-selected="{% if i == 0 %}true{% else %}false{% endif %}">{{ an }}</button>
+                    </li>
+                {% elseif i == max - 1 %}
+                    <li class="nav-item" role="liste">
+                        <button class="nav-link" id="t{{ an }}-tab" data-bs-toggle="tab" data-bs-target="#t{{ an }}" type="button" role="tab" aria-controls="t{{ an }}" aria-selected="false">{{ an }} et année précédentes</button>
+                    </li>
+                {% else %}
+                    <li class="nav-item" role="liste">
+                        <button class="nav-link" id="tnc-tab" data-bs-toggle="tab" data-bs-target="#tnc" type="button" role="tab" aria-controls="tnc" aria-selected="false">dates inconnues</button>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        
+        <div class="tab-content" id="tabDecesContent">
+            {% for i in range(0, max) %}
+                {% set an = anref - i %}
+                {% if i < max %}
+                    <div class="tab-pane fade {% if i == 0 %}show active{% endif %}" id="t{{ an }}" role="tabpanel" aria-labelledby="t{{ an }}-tab">
+                {% else %}
+                    <div class="tab-pane fade" id="tnc" role="tabpanel" aria-labelledby="tnc-tab">
+                {% endif %}
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Nom et prénom</th>
+                                <th>Premier pèlerinage</th>
+                                <th>Nb pèlerinages</th>
+                                <th>Dernier pèlerinage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for decede in deces %}
+                                {% if i < max - 1 %}
+                                    {% if decede.datedeces and decede.datedeces|date('Y') == an %}
+                                        <tr>
+                                            <td>{{ decede.datedeces|date("d/m/Y") }}</td>
+                                            <td>{{ decede.civilite }} {{ decede.prenom }} {{ decede.nom }}</td>
+                                            {% if decede.ppele > 0 %}
+                                                <td>{{ decede.ppele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            {% if decede.nbpele > 0 %}
+                                                <td>{{ decede.nbpele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            {% if decede.dpele > 0 %}
+                                                <td>{{ decede.dpele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endif %}
+                                {% elseif i == max - 1 %}
+                                    {% if decede.datedeces and decede.datedeces|date('Y') <= an %}
+                                        <tr>
+                                            {% if decede.datedeces %}
+                                                <td>{{ decede.datedeces|date("d/m/Y") }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            <td>{{ decede.civilite }} {{ decede.prenom }} {{ decede.nom }}</td>
+                                            {% if decede.ppele > 0 %}
+                                                <td>{{ decede.ppele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            {% if decede.nbpele > 0 %}
+                                                <td>{{ decede.nbpele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            {% if decede.dpele > 0 %}
+                                                <td>{{ decede.dpele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endif %}
+                                {% else %}
+                                    {% if decede.datedeces is empty %}
+                                        <tr>
+                                            <td>-</td>
+                                            <td>{{ decede.civilite }} {{ decede.prenom }} {{ decede.nom }}</td>
+                                            {% if decede.ppele > 0 %}
+                                                <td>{{ decede.ppele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            {% if decede.nbpele > 0 %}
+                                                <td>{{ decede.nbpele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                            {% if decede.dpele > 0 %}
+                                                <td>{{ decede.dpele }}</td>
+                                            {% else %}
+                                                <td>-</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

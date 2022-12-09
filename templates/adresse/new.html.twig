@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une nouvelle adresse{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Nouvelle adresse pour : </h1>
+        {{ include('adresse/_form.html.twig', {button: 'Créer'}) }}
+    </div>
+{% endblock %}

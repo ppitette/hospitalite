@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Édition de l'adresse{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="border-bottom mb-3">Édition de l'adresse</h1>
+        {{ include('adresse/_form.html.twig', {button: 'Enregistrer'}) }}
+    </div>
+{% endblock %}

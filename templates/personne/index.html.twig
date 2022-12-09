@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% trans_default_domain 'messages' %}
+
+{% block body %}
+    {% include "_partials/_flashbag.html.twig" %}
+
+    <form class="container mt-4 mb-2">
+        {{ form_start(form) }}
+            <div class="row align-items-center">
+                <div class="col-2">
+                    {{ form_widget(form.nom, {
+                        'attr': {
+                            'placeholder': 'Nom',
+                            'class': 'form-control-sm'
+                        }
+                    }) }}
+                </div>
+                <div class="col-2">
+                    {{ form_widget(form.prenom, {'attr': {'placeholder': 'Prénom', 'class': 'form-control-sm'}}) }}
+                </div>
+                <div class="col-2">
+                    {{ form_widget(form.commune, {'attr': {'placeholder': 'Commune', 'class': 'form-control-sm'}}) }}
+                </div>
+                <div class="col-2">
+                    {{ form_widget(form.telephone, {'attr': {'placeholder': 'Téléphone', 'class': 'form-control-sm'}}) }}
+                </div>
+                <div class="col-2">
+                    <div class="input-group">
+                        {{ form_widget(form.decede) }}Personne décédée ?
+                    </div>
+                </div>
+                <div class="col-2 ms-auto">
+                    <button class="btn btn-primary btn-sm">Rechercher</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </form>
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover table-sm mt-2">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Civilité</th>
+                        <th scope="col" class="text-center">Nom et prénom</th>
+                        <th scope="col" class="text-center">Date de naissance</th>
+                        <th scope="col" class="text-center">Commune</th>
+                        <th scope="col" class="text-center">Téléphone</th>
+                        <th scope="col" class="text-center">Mobile</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for personne in personnes %}
+                        <tr>
+                            <td>{{ personne.civilite }}</td>
+                            <td>{{ personne.nom }} {{ personne.prenom }}</td>
+                            <td class="text-center">
+                                {% if personne.datenaiss %}
+                                    {% if personne.decede %}
+                                        {{ personne.datenaiss|date("d/m/Y") }}
+                                        {% if personne.datedeces %}
+                                            - {{ personne.datedeces|date("d/m/Y") }}
+                                        {% endif %}
+                                    {% else %}
+                                        {{ personne.datenaiss|date("d/m/Y") }} ({{ personne.age }} ans)
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            {% if personne.adresse %}
+                                <td>
+                                    {{ personne.adresse.commune }}
+                                </td>
+                            {% else %}
+                                <td>_</td>
+                            {% endif %}
+                            <td class="text-center">{{ personne.telephone|phone }}</td>
+                            <td class="text-center">{{ personne.mobile|phone }}</td>
+                            <td class="text-reset">
+                                {% if is_granted('ROLE_LECT') %}
+                                    <a href="{{ path('pers.show', {id: personne.id}) }}" class="btn btn-primary btn-sm" role="button">Consulter</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-auto me-auto">
+                    <div class="pagination">
+                        {{ knp_pagination_render(personnes) }}
+                    </div>
+                </div>
+                <div class="col-auto ms-auto">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('pers.new') }}" class="btn btn-primary btn-sm">Créer une nouvelle personne</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

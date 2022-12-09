@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affectation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2>{{ inscription.personne.prenom }} {{ inscription.personne.nom }}</h2>
+        {{ include('affectation/_form.html.twig', {button: 'Enregistrer'}) }}
+    </div>
+{% endblock %}

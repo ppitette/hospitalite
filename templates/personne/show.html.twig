@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ personne.nom }} {{ personne.prenom }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="h4 row">
+            <div class="col-2">
+                {% if personne.genre == 0 %}
+                    <img class="img-fluid img-thumbnail w-50" src="{{ asset('images/photo_0_defaut.png') }}" alt="Photo">
+                {% endif %}
+                {% if personne.genre == 1 %}
+                    <img class="img-fluid img-thumbnail w-50" src="{{ asset('images/photo_1_defaut.png') }}" alt="Photo">
+                {% endif %}
+                {% if personne.genre == 2 %}
+                    <img class="img-fluid img-thumbnail w-50" src="{{ asset('images/photo_2_defaut.png') }}" alt="Photo">
+                {% endif %}
+            </div>
+            <div class="col-6">
+                {{ personne.civilite }}
+                {{ personne.prenom }}
+                {{ personne.nom }}
+                {% if personne.nomNaiss %}
+                    {{ personne.nomNaiss }}
+                {% endif %}
+                <div class="h6">
+                    {% if personne.datenaiss %}
+                        {% if personne.decede %}
+                            {{ personne.datenaiss|date("d/m/Y") }}
+                            {% if personne.datedeces %}
+                                - {{ personne.datedeces|date("d/m/Y") }}
+                            {% endif %}
+                        {% else %}
+                            {{ personne.datenaiss|date("d/m/Y") }}<span class="text-warning"> ({{ personne.age }} ans)</span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <p class="mt-2">{{ params.getMedicalLib(personne.medical, personne.medicalAutre) }}</p>
+            </div>
+            <div class="col-4">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('pers.edit', {id: personne.id}) }}" class="btn btn-primary" role="button">Éditer</a>
+                    {% if personne.adresse %}
+                        <a href="{{ path('adresse.edit', {id: personne.adresse.id }) }}" class="btn btn-success" role="button">Adresse</a>
+                    {% else %}
+                        <a href="{{ path('adresse.new', {id: personne.id }) }}" class="btn btn-success" role="button">Adresse</a>
+                    {% endif %}
+                    {% if not personne.inscription %}
+                        <a href="{{ path('insc.new', {id: personne.id}) }}" class="btn btn-warning" role="button">Inscrire</a>
+                    {% endif %}
+                    <form method="post" action="{{ path('pers.delete', {id: personne.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous sûr(e) ?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ personne.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row flex">
+            <div class="col-4">
+                <div class="card">
+                    <p class="h5 card-header">
+                        Adresse
+                        {% if persAdr == 'P' %}
+                            <i class="fas fa-compress-arrows-alt"></i>
+                        {% endif %}
+                    </p>
+                    <div class="card-body">
+                        <div class="card-text">
+                            {% if personne.adresse %}
+                                <p>{{ personne.adresse.libAdresse|nl2br }}</p>
+                                <hr>
+                                <div class="row">
+                                    {% if personne.adresse.diocese %}
+                                        <div class="col-12">{{ personne.adresse.diocese ?: '-' }}</div>
+                                        {# TODO: remplacer le libellé par un paramètre #}
+                                        {% if personne.adresse.diocese == "Diocèse d'Évreux" %}
+                                            <div class="col-12">{{ personne.adresse.secteur }}</div>
+                                            <div class="col-12">Paroisse {{ personne.adresse.paroisse }}</div>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <p class="h5 card-header">Coordonnées</p>
+                    <div class="card-body">
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                                <tr>
+                                    <td>Téléphone :</td>
+                                    <td>{{ personne.telephone ? personne.telephone|phone : ' ' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile :</td>
+                                    <td>{{ personne.mobile ? personne.mobile|phone : ' ' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Courriel :</td>
+                                    {% if personne.lrCourriel == false %}
+                                        <td>{{ personne.courriel ? : ' ' }}</td>
+                                    {% else %}
+                                        <td class="liste-rouge">Liste rouge</td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <p class="h5 card-header">Parcours</p>
+                    <div class="card-body">
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                                <tr>
+                                    <td>Nombre de pèlerinage</td>
+                                    <td>{{ personne.nbPele ? personne.nbPele : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Premier pèlerinage</td>
+                                    <td>{{ personne.pPele ? personne.pPele : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dernier pèlerinage</td>
+                                    <td>{{ personne.dPele ? personne.dPele : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Engagement en Hospitalité</td>
+                                    <td>{{ personne.engHosp ? personne.engHosp : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Engagement en Église</td>
+                                    <td>{{ personne.engEgl ? personne.engEgl : '' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if personne.participations %}
+        <div class="container mt-4">
+            <div class="row flex">
+                <div class="col-12">
+                    <div class="card">
+                        <p class="h5 card-header">Historique</p>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Pèlerinage</th>
+                                        <th>Age</th>
+                                        <th>Num</th>
+                                        <th>Entité</th>
+                                        <th>Voyage</th>
+                                        <th>Hébergement</th>
+                                        <th>Groupe</th>
+                                        <th>Resp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for participation in personne.participations|sort((a, b) => a.agePele <=> b.agePele)|reverse %}
+                                        <tr>
+                                            <td>{{ participation.pelerinage.abrege }}</td>
+                                            <td>{{ participation.agePele }}</td>
+                                            <td>{{ participation.NumInsc }}</td>
+                                            {% if participation.desist %}
+                                                {% if participation.horsEffectif %}
+                                                    <td>( {{ participation.entite }}-[HE] )</td>
+                                                {% else %}
+                                                    <td>( {{ participation.entite }} )</td>
+                                                {% endif %}
+                                            {% else %}
+                                                {% if participation.horsEffectif %}
+                                                    <td>{{ participation.entite }}-[HE]</td>
+                                                {% else %}
+                                                    <td>{{ participation.entite }}</td>
+                                                {% endif %}
+                                            {% endif %}
+                                            <td>{{ participation.voyage }}</td>
+                                            <td>{{ participation.hebergement }}</td>
+                                            <td>{{ participation.groupe }}</td>
+                                            <td>-</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('inscription') }}
+{% endblock %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2>Inscription de {{ inscription.personne.prenom }} {{ inscription.personne.nom }}</h2>
+        {{ include('inscription/_form.html.twig', {button: 'Enregistrer'}) }}
+    </div>
+{% endblock %}

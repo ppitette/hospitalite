@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affectation{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row mb-2">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header"><strong>{{ inscription.personne.nom }} {{ inscription.personne.prenom }}</strong></div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-3">Groupe</dt>
+                            <dd class="col-9">{{ params.getLibelle('groupe', inscription.groupe) }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header"><strong>Transport</strong></div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-3">Car</dt>
+                            <dd class="col-9">{{ params.getLibelle('transp', inscription.trnsCar) }}</dd>
+                            <dt class="col-3">Siège</dt>
+                            <dd class="col-9">{{ params.getLibelle('siege', inscription.trnsSiege) }}</dd>
+                            <dt class="col-3">Place</dt>
+                            <dd class="col-9">{{ inscription.trnsPlace }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="card">
+                    <div class="card-header"><strong>Hébergement</strong></div>
+                    {% if inscription.hebHosp %}
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-3">Hôtel</dt>
+                                <dd class="col-9">{{ params.getLibelle('hotel', inscription.hebHotel) }}</dd>
+                                <dt class="col-3">Chambre</dt>
+                                <dd class="col-9">{{ inscription.hebChambre }}</dd>
+                            </dl>
+                            {% if partChambre|length > 1 %}
+                                <ul class="list-group list-group-flush">
+                                {% for partage in partChambre %}
+                                    <li class="list-group-item">{{ partage }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-3">Heb. Perso</dt>
+                                <dd class="col-9">{{ inscription.hebPerso }}</dd>
+                            </dl>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('insc.edit_aff', {id: inscription.id}) }}" class="btn btn-primary">Éditer</a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exports{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <p class="h2 mb-4">Choisissez une des listes :</p>
+    <div class="row">
+        <div class="col-2">
+            <a href="{{ path('export.mlist') }}" class="btn btn-success btn-sm" role="button">Mailing-List (csv)</a>
+        </div>
+        <div class="col-2">
+            <a href="{{ path('export.hlist') }}" class="btn btn-info btn-sm" role="button">Hospitaliers (xlsx)</a>
+        </div>
+        <div class="col-2">
+            <a href="{{ path('export.hlist') }}" class="btn btn-warning btn-sm" role="button">Pers Malades (xlsx)</a>
+        </div>
+        <div class="col-2">
+            <a href="{{ path('export.hlist') }}" class="btn btn-danger btn-sm" role="button">Autres (xlsx)</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

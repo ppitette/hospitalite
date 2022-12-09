@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Graphiques{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="wrapper">
+            <h3>{{ params.getLibelle('pele', 0) }}</h3>
+            <div class="tab-pane" id="chartjs">
+                <div class="row mt">
+                    <div class="col-lg-8">
+                        <div class="content-panel">
+                            <h4><i class="fa fa-angle-right"></i> Inscriptions</h4>
+                            <div class="panel-body text-center">
+                                {{ render_chart(chart00, {'class': 'graph00'}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="content-panel">
+                            <h4><i class="fa fa-angle-right"></i> Voyage en Car</h4>
+                            <div class="panel-body">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"> </th>
+                                            <th scope="col">Aller</th>
+                                            <th scope="col">Retour</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Hospitaliers</td>
+                                            <td>{{tabTransp.HOSP.A}}</td>
+                                            <td>{{tabTransp.HOSP.R}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pers Malades</td>
+                                            <td>{{tabTransp.PMAL.A}}</td>
+                                            <td>{{tabTransp.PMAL.R}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lycéens</td>
+                                            <td>{{tabTransp.LYCE.A}}</td>
+                                            <td>{{tabTransp.LYCE.R}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>{{tabTransp.TOT.A}}</td>
+                                            <td>{{tabTransp.TOT.R}}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt">
+                    <div class="col-lg-4">
+                        <div class="content-panel">
+                            <h4><i class="fa fa-angle-right"></i> Dossiers Hospitaliers</h4>
+                            <div class="panel-body text-center">
+                                {{ render_chart(chart11, {'class': 'graph11'}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="content-panel">
+                            <h4><i class="fa fa-angle-right"></i> Dossiers Lycéens</h4>
+                            <div class="panel-body text-center">
+                                {{ render_chart(chart12, {'class': 'graph12'}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="content-panel">
+                            <h4><i class="fa fa-angle-right"></i> Dossiers Personnes Malades</h4>
+                            <div class="panel-body text-center">
+                                {{ render_chart(chart13, {'class': 'graph13'}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
