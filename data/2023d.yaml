@@ -1,0 +1,420 @@
+# data/l2022.yaml
+pele:
+    0:
+        lib: 'Lourdes 2023'
+        abr: '2023D'
+        cmp: '2023-08-17'
+
+entite:
+    0:
+        lib: 'Hospitalier'
+        abr: 'HO'
+        cmp: null
+    1:
+        lib: 'Hospitalier indépendant'
+        abr: 'HI'
+        cmp: null
+    2:
+        lib: 'Encadrement lycéens'
+        abr: 'EL'
+        cmp: null
+    3:
+        lib: 'Lycéen'
+        abr: 'LY'
+        cmp: null
+    4:
+        lib: 'Personne malade'
+        abr: 'PM'
+        cmp: null
+
+connu:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: null
+    1:
+        lib: 'par une hospitalière ou un hospitalier'
+        abr: 'HSP'
+        cmp: null
+    2:
+        lib: 'par une annonce en paroisse'
+        abr: 'ANN'
+        cmp: null
+    3:
+        lib: 'autre moyen'
+        abr: 'DIV'
+        cmp: null
+
+etat:
+    0:
+        lib: 'Enregistré'
+        abr: 'insc_enreg'
+        cmp: 'ENR'
+    1:
+        lib: 'Dossier envoyé'
+        abr: 'doss_envoye'
+        cmp: 'ENV'
+    2:
+        lib: 'Dossier retourné'
+        abr: 'doss_retourne'
+        cmp: 'RET'
+    3:
+        lib: 'Inscription validée'
+        abr: 'insc_valide'
+        cmp: 'VAL'
+    4:
+        lib: 'Inscription refusée'
+        abr: 'insc_refuse'
+        cmp: 'REF'
+    5:
+        lib: 'Inscription confirmée'
+        abr: 'insc_confirme'
+        cmp: 'CNF'
+    6:
+        lib: 'Désisté'
+        abr: 'insc_desist'
+        cmp: 'DES'
+    7:
+        lib: 'Présent au pèlerinage'
+        abr: 'pele_present'
+        cmp: 'PRE'
+
+genre:
+    0:
+        lib: 'Indéfini'
+        abr: 'IND'
+        cmp: null
+    1:
+        lib: 'Homme'
+        abr: 'HOM'
+        cmp: null
+    2:
+        lib: 'Femme'
+        abr: 'FEM'
+        cmp: null
+
+hotel:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: 'Rouge'
+    1:
+        lib: 'Accueil'
+        abr: 'ACC'
+        cmp: 'Rouge'
+    2:
+        lib: 'Ave Maria'
+        abr: 'AVE'
+        cmp: 'Violette'
+    3:
+        lib: 'Galilée Windsor'
+        abr: 'GAL'
+        cmp: 'Bleue'
+    4:
+        lib: 'Galilée Windsor (Lycéens)'
+        abr: 'GLL'
+        cmp: 'Bleue'
+    5:
+        lib: 'Métropole'
+        abr: 'MET'
+        cmp: 'Jaune'
+    6:
+        lib: 'National'
+        abr: 'NAT'
+        cmp: 'Verte'
+    7:
+        lib: 'Ste Agnès'
+        abr: 'SAG'
+        cmp: 'Blanche'
+
+partch:
+    0:
+        lib: 'De préf. avec'
+        abr: 'PRT'
+        cmp: null
+    1:
+        lib: 'Indifférent'
+        abr: 'PRS'
+        cmp: null
+
+medical:
+    0:
+        lib: 'Non'
+        abr: 'NON'
+        cmp: null
+    1:
+        lib: 'Médecin'
+        abr: 'MED'
+        cmp: null
+    2:
+        lib: 'Infirmier(ère)'
+        abr: 'INF'
+        cmp: null
+    3:
+        lib: 'Aide-Soignant(e)'
+        abr: 'AIS'
+        cmp: null
+    4:
+        lib: 'Kinésithérapeute'
+        abr: 'KIN'
+        cmp: null
+    5:
+        lib: 'Pharmacien(ne)'
+        abr: 'PHA'
+        cmp: null
+    8:
+        lib: 'Étudiant(e)'
+        abr: 'ETU'
+        cmp: null
+    9:
+        lib: 'Autre'
+        abr: 'AUT'
+        cmp: null
+
+chserv:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: null
+    1:
+        lib: 'Homme'
+        abr: 'HOM'
+        cmp: null
+    2:
+        lib: 'Femme'
+        abr: 'FEM'
+        cmp: null
+    3:
+        lib: 'Indifférent'
+        abr: 'IND'
+        cmp: null
+
+situat:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: null
+    1:
+        lib: 'Etudiant(e)'
+        abr: 'ETU'
+        cmp: null
+    2:
+        lib: 'Sans emploi'
+        abr: 'SEM'
+        cmp: null
+    3:
+        lib: 'Vie active'
+        abr: 'VAC'
+        cmp: null
+    4:
+        lib: 'Retraité(e)'
+        abr: 'RTR'
+        cmp: null
+
+groupe:
+    0:
+        lib: 'Non spécifié'
+        abr: 'N'
+        cmp: null
+    1:
+        lib: 'Jaune'
+        abr: 'J'
+        cmp: null
+    2:
+        lib: 'Rose'
+        abr: 'R'
+        cmp: null
+    3:
+        lib: 'Bleu'
+        abr: 'B'
+        cmp: null
+    4:
+        lib: 'Orange'
+        abr: 'O'
+        cmp: null
+    5:
+        lib: 'Vert'
+        abr: 'V'
+        cmp: null
+    9:
+        lib: 'Lycéens'
+        abr: 'L'
+        cmp: null
+
+transp:
+    0:
+        lib: 'Non spécifié'
+        abr: 'N'
+        cmp: null
+    1:
+        lib: 'Ste Bernadette'
+        abr: 'SB'
+        cmp: null
+    2:
+        lib: 'Bx Père Laval'
+        abr: 'PL'
+        cmp: null
+    3:
+        lib: 'St Benoit Labre'
+        abr: 'BL'
+        cmp: null
+    4:
+        lib: 'St François'
+        abr: 'FR'
+        cmp: null
+    5:
+        lib: 'Ste Thérèse'
+        abr: 'TH'
+        cmp: null
+    6:
+        lib: 'St Taurin'
+        abr: 'TH'
+        cmp: null
+    7:
+        lib: 'St Anselme'
+        abr: 'AN'
+        cmp: null
+    8:
+        lib: 'St Ouen'
+        abr: 'OU'
+        cmp: null
+    9:
+        lib: 'St Aquilin'
+        abr: 'AQ'
+        cmp: null
+    10:
+        lib: 'St Adjutor'
+        abr: 'AD'
+        cmp: null
+    11:
+        lib: 'St Vincent de Paul'
+        abr: 'VP'
+        cmp: null
+
+siege:
+    0:
+        lib: 'Non atttribué'
+        abr: 'N'
+        cmp: null
+    1:
+        lib: 'Brancard'
+        abr: 'BR'
+        cmp: null
+    2:
+        lib: 'Large'
+        abr: 'LG'
+        cmp: null
+    3:
+        lib: 'Royal Class'
+        abr: 'RC'
+        cmp: null
+    4:
+        lib: 'Fauteuil roulant'
+        abr: 'FR'
+        cmp: null
+    5:
+        lib: 'Classique'
+        abr: 'CL'
+        cmp: null
+
+resp:
+    0:
+        lib: 'Non spécifié'
+        abr: 'N'
+        cmp: null
+    1:
+        lib: 'Président'
+        abr: 'PR'
+        cmp: null
+    2:
+        lib: 'Vice-Présidente'
+        abr: 'VP'
+        cmp: null
+    3:
+        lib: 'Trésorier'
+        abr: 'TR'
+        cmp: null
+    4:
+        lib: 'Secrétaire intérieur'
+        abr: 'SI'
+        cmp: null
+    5:
+        lib: 'Aumônier'
+        abr: 'AU'
+        cmp: null
+    6:
+        lib: 'Equipe médicale'
+        abr: 'EM'
+        cmp: null
+    7:
+        lib: 'Responsable de groupe'
+        abr: 'CG'
+        cmp: null
+    8:
+        lib: 'Responsable de chambre'
+        abr: 'RC'
+        cmp: null
+    9:
+        lib: "Responsable d'animation"
+        abr: 'RA'
+        cmp: null
+    10:
+        lib: 'Animation en groupe'
+        abr: 'AN'
+        cmp: null
+    11:
+        lib: 'Responsable matériel'
+        abr: 'RM'
+        cmp: null
+    12:
+        lib: 'Responsable salle à manger'
+        abr: 'SM'
+        cmp: null
+    13:
+        lib: 'Secrétaire extérieur'
+        abr: 'SE'
+        cmp: null
+    14:
+        lib: 'Départ Hall Saint-Frai'
+        abr: 'SE'
+        cmp: null
+    15:
+        lib: 'Responsable lingerie'
+        abr: 'RL'
+        cmp: null
+    16:
+        lib: 'Responsable chant et musique'
+        abr: 'CM'
+        cmp: null
+    18:
+        lib: 'Responsable des Tranports'
+        abr: 'RT'
+        cmp: null
+    19:
+        lib: 'Responsable de car'
+        abr: 'RB'
+        cmp: null
+    20:
+        lib: 'Responsable bagages en soute'
+        abr: 'BG'
+        cmp: null
+    21:
+        lib: "Membre de l'équipage"
+        abr: 'EQ'
+        cmp: null
+    22:
+        lib: "Responsable matériel d'hygiène"
+        abr: 'RH'
+        cmp: null
+    23:
+        lib: 'Equipe matériel'
+        abr: 'RH'
+        cmp: null
+    24:
+        lib: 'Référent Covid'
+        abr: 'CV'
+        cmp: null
+    26:
+        lib: 'Ambassadeur Engagement'
+        abr: 'AE'
+        cmp: null

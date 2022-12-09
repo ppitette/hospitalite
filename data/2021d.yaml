@@ -1,0 +1,202 @@
+# data/l2021.yaml
+pele:
+    0:
+        lib: 'Lourdes 2021'
+        abr: '2021D'
+        cmp: '2021-07-21'
+
+connu:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: null
+    1:
+        lib: 'par une hospitalière ou un hospitalier'
+        abr: 'HSP'
+        cmp: null
+    2:
+        lib: 'par une annonce en paroisse'
+        abr: 'ANN'
+        cmp: null
+    3:
+        lib: 'autre moyen'
+        abr: 'DIV'
+        cmp: null
+
+entite:
+    0:
+        lib: 'Hospitalier'
+        abr: 'HSP'
+        cmp: null
+    1:
+        lib: 'Hospitalier indépendant'
+        abr: 'IND'
+        cmp: null
+    2:
+        lib: 'Encadrement lycéens'
+        abr: 'ELY'
+        cmp: null
+    3:
+        lib: 'Lycéen'
+        abr: 'LYC'
+        cmp: null
+    4:
+        lib: 'Personne malade'
+        abr: 'PMAL'
+        cmp: null
+
+etat:
+    0:
+        lib: 'Enregistré'
+        abr: 'inscr_enreg'
+        cmp: 'ENR'
+    1:
+        lib: 'Dossier envoyé'
+        abr: 'doss_envoye'
+        cmp: 'ENV'
+    2:
+        lib: 'Dossier retourné'
+        abr: 'doss_retourne'
+        cmp: 'RET'
+    3:
+        lib: 'Inscription validée'
+        abr: 'inscr_valide'
+        cmp: 'VAL'
+    4:
+        lib: 'Inscription refusée'
+        abr: 'inscr_refuse'
+        cmp: 'REF'
+    5:
+        lib: 'Inscription confirmée'
+        abr: 'inscr_confirme'
+        cmp: 'CNF'
+    6:
+        lib: 'Désisté'
+        abr: 'inscr_desist'
+        cmp: 'DES'
+    7:
+        lib: 'Présent au pèlerinage'
+        abr: 'pele_present'
+        cmp: 'PRE'
+
+genre:
+    0:
+        lib: 'Indéfini'
+        abr: 'IND'
+        cmp: null
+    1:
+        lib: 'Homme'
+        abr: 'HOM'
+        cmp: null
+    2:
+        lib: 'Femme'
+        abr: 'FEM'
+        cmp: null
+
+heberg:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: 'Rouge'
+    1:
+        lib: 'Accueil'
+        abr: 'ACC'
+        cmp: 'Rouge'
+    2:
+        lib: 'Ave Maria'
+        abr: 'AVE'
+        cmp: 'Violette'
+    3:
+        lib: 'Galilée Windsor'
+        abr: 'GAL'
+        cmp: 'Bleue'
+    4:
+        lib: 'Galilée Windsor (Lycéens)'
+        abr: 'GLL'
+        cmp: 'Bleue'
+    5:
+        lib: 'Métropole'
+        abr: 'MET'
+        cmp: 'Jaune'
+    6:
+        lib: 'National'
+        abr: 'NAT'
+        cmp: 'Verte'
+    7:
+        lib: 'Ste Agnès'
+        abr: 'SAG'
+        cmp: 'Blanche'
+
+medical:
+    0:
+        lib: 'Non'
+        abr: 'NON'
+        cmp: null
+    1:
+        lib: 'Médecin'
+        abr: 'MED'
+        cmp: null
+    2:
+        lib: 'Infirmier(ère)'
+        abr: 'INF'
+        cmp: null
+    3:
+        lib: 'Aide-Soignant(e)'
+        abr: 'AIS'
+        cmp: null
+    4:
+        lib: 'Kinésithérapeute'
+        abr: 'KIN'
+        cmp: null
+    5:
+        lib: 'Pharmacien(ne)'
+        abr: 'PHA'
+        cmp: null
+    8:
+        lib: 'Étudiant(e)'
+        abr: 'ETU'
+        cmp: null
+    9:
+        lib: 'Autre'
+        abr: 'AUT'
+        cmp: null
+
+pchamb:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: null
+    1:
+        lib: 'Homme'
+        abr: 'HOM'
+        cmp: null
+    2:
+        lib: 'Femme'
+        abr: 'FEM'
+        cmp: null
+    3:
+        lib: 'Indifférent'
+        abr: 'IND'
+        cmp: null
+
+situat:
+    0:
+        lib: 'Non spécifié'
+        abr: 'NSP'
+        cmp: null
+    1:
+        lib: 'Etudiant(e)'
+        abr: 'ETU'
+        cmp: null
+    2:
+        lib: 'Sans emploi'
+        abr: 'SEM'
+        cmp: null
+    3:
+        lib: 'Vie active'
+        abr: 'VAC'
+        cmp: null
+    4:
+        lib: 'Retraité(e)'
+        abr: 'RTR'
+        cmp: null
