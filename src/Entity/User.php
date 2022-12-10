@@ -179,7 +179,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isIsEnable(): ?bool
+    public function getFullName(): string
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
+
+    public function getIsEnable(): ?bool
     {
         return $this->isEnable;
     }
@@ -227,7 +232,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isIsVerified(): ?bool
+    public function getIsVerified(): ?bool
     {
         return $this->isVerified;
     }

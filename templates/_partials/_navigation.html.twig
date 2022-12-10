@@ -1,0 +1,61 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('app.home') }}">Hospitalité</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            {% if app.user %}
+                <ul class="navbar-nav me-auto">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ path('pers.index') }}">Personnes</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Listes
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ path('liste.deces') }}">Décès</a></li>
+                                {# <li><a class="dropdown-item" href="#">Liste 02</a></li> #}
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pèlerinage
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ path('insc.index') }}">Inscrits</a></li>
+                                <li><a class="dropdown-item" href="{{ path('insc.hosp_list') }}">Hospitaliers</a></li>
+                                <li><a class="dropdown-item" href="{{ path('insc.pmal_list') }}">Pers malades</a></li>
+                                <li><a class="dropdown-item" href="{{ path('insc.lyce_list') }}">Grp Lycéens</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ path('graph.insc') }}">Graphiques</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a class="nav-item nav-link" href="{{ path('admin') }}#">Administration</a>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user mr-2"></i> {{ app.user.fullname }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{ path('app.logout') }}"><i class="fas fa-sign-in-alt"></i> Se déconnecter</a>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-id-card"></i> Mon compte</a>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-key"></i> Mot de passe</a>
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ms-auto">
+                    <a class="nav-item nav-link " href="{{ path('app.login') }}"><i class="fas fa-sign-in-alt"></i> Se connecter</a>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

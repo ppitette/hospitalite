@@ -1,5 +1,13 @@
-// assets/styles/app.scss
+/*
+ * assets/styles/app.scss
+ */
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "variables";
+@import "~bootstrap";
+
+.jumbotron {
+     padding: 2rem 1rem;
+     margin-bottom: 2rem;
+     /* background-color: #607d8b; */
+     border-radius: .3rem;
+}

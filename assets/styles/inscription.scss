@@ -1,0 +1,37 @@
+/*
+ * assets/styles/inscriptions.scss
+ */
+
+@import "variables";
+
+#insc_enreg {
+    color: $twinkle_blue;
+}
+
+#doss_envoye {
+    color: $orange_hibiscus;
+}
+
+#doss_retourne {
+    color: $reptile_green;
+}
+
+#insc_valide {
+    color: $high_blue;
+}
+
+#insc_refuse {
+    color: $lighter_purple;
+}
+
+#insc_confirme {
+    color: $nyc_taxi;
+}
+
+#pele_present {
+    color: $nyc_taxi;
+}
+
+#insc_desist {
+    color: $fusion_red;
+}

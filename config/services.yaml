@@ -1,5 +1,9 @@
 # config/security.yaml
 parameters:
+    locale: 'fr'
+    app.docum_directory: '%kernel.project_dir%/data'
+    app.sender_email: '%env(MAILER_SENDER_EMAIL)%'
+    app.sender_name: '%env(MAILER_SENDER_NAME)%'
 
 services:
     # default configuration for services in *this* file

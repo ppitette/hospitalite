@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Inscription;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,46 +22,215 @@ class InscriptionRepository extends ServiceEntityRepository
         parent::__construct($registry, Inscription::class);
     }
 
-    public function save(Inscription $entity, bool $flush = false): void
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function findInscrit()
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->createQueryBuilder('i')
+            ->join('i.personne', 'p')
+            ->orderBy('p.nom', 'ASC')
+            ->addOrderBy('p.prenom', 'ASC')
+            ->where('i.currentPlace != :et')
+            ->setParameter('et', 'insc_desist')
+        ;
     }
 
-    public function remove(Inscription $entity, bool $flush = false): void
+    /**
+     * @return Inscription[] Returns an array of Inscription objects
+     */
+    public function findInscritEnt(string $ent)
     {
-        $this->getEntityManager()->remove($entity);
+        $query = $this->createQueryBuilder('i')
+            ->join('i.personne', 'p')
+            ->orderBy('p.nom', 'ASC')
+            ->addOrderBy('p.prenom', 'ASC')
+            ->where('i.currentPlace != :et')
+            ->setParameter('et', 'insc_desist');
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        switch ($ent) {
+            case 'H':
+                $query = $query
+                    ->andWhere('i.entite = :ho or i.entite = :hi')
+                    ->setParameter('ho', 0)
+                    ->setParameter('hi', 1);
+                break;
+            case 'L':
+                $query = $query
+                    ->andWhere('i.entite = :le or i.entite = :ly')
+                    ->setParameter('le', 2)
+                    ->setParameter('ly', 3);
+                break;
+            case 'P':
+                $query = $query
+                    ->andWhere('i.entite = :pm')
+                    ->setParameter('pm', 4);
         }
+
+        return $query->getQuery()->getResult();
     }
 
-//    /**
-//     * @return Inscription[] Returns an array of Inscription objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findForPagination(?string $ent = null, bool $desist = true): Query
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->join('i.personne', 'p')
+            ->orderBy('p.nom', 'ASC')
+            ->addOrderBy('p.prenom', 'ASC')
+        ;
 
-//    public function findOneBySomeField($value): ?Inscription
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if (!$desist) {
+            $qb->where('i.currentPlace != :et')
+                ->setParameter('et', 'insc_desist');
+        }
+
+        if ($ent) {
+            switch ($ent) {
+                case 'H':
+                    $qb->andWhere('i.entite = :ho or i.entite = :hi')
+                        ->setParameter('ho', 0)
+                        ->setParameter('hi', 1);
+                    break;
+                case 'L':
+                    $qb->andWhere('i.entite = :le or i.entite = :ly')
+                        ->setParameter('le', 2)
+                        ->setParameter('ly', 3);
+                    break;
+                case 'P':
+                    $qb->andWhere('i.entite = :pm')
+                        ->setParameter('pm', 4);
+            }
+        }
+
+        return $qb->getQuery();
+    }
+
+    public function findInscritHeberg()
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.numInsc', 'ASC')
+            ->where('i.currentPlace != :et')
+            ->setParameter('et', 'insc_desist')
+        ;
+    }
+
+    public function findChambrePart($hotel, $chambre)
+    {
+        return $this->createQueryBuilder('i')
+            ->select('p.prenom')
+            ->addSelect('p.nom')
+            ->join('i.personne', 'p')
+            ->andWhere('i.hebHotel = :hotel')
+            ->setParameter('hotel', $hotel)
+            ->andWhere('i.hebChambre = :chambre')
+            ->setParameter('chambre', $chambre)
+            ->andWhere('i.currentPlace != :statut')
+            ->setParameter('statut', 'insc_desist')
+            ->orderBy('p.nom', 'ASC')
+            ->addOrderBy('p.prenom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function inscVoyage(): array
+    {
+        $datas = $this->createQueryBuilder('i')
+            ->select(['i.numInsc', 'i.entite', 'i.voyAller', 'i.voyRetour'])
+            ->andWhere('i.currentPlace != :et')
+            ->setParameter('et', 'insc_desist')
+            ->orderBy('i.numInsc', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $table['HOSP']['A'] = 0;
+        $table['HOSP']['R'] = 0;
+        $table['LYCE']['A'] = 0;
+        $table['LYCE']['R'] = 0;
+        $table['PMAL']['A'] = 0;
+        $table['PMAL']['R'] = 0;
+        $table['TOT']['A'] = 0;
+        $table['TOT']['R'] = 0;
+
+        foreach ($datas as $data) {
+            switch ($data['entite']) {
+                case 0:
+                case 1:
+                    if ($data['voyAller']) {
+                        $table['HOSP']['A'] += 1;
+                        $table['TOT']['A'] += 1;
+                    }
+                    if ($data['voyRetour']) {
+                        $table['HOSP']['R'] += 1;
+                        $table['TOT']['R'] += 1;
+                    }
+                    break;
+                case 2:
+                case 3:
+                    if ($data['voyAller']) {
+                        $table['LYCE']['A'] += 1;
+                        $table['TOT']['A'] += 1;
+                    }
+                    if ($data['voyRetour']) {
+                        $table['LYCE']['R'] += 1;
+                        $table['TOT']['R'] += 1;
+                    }
+                    break;
+                case 4:
+                    if ($data['voyAller']) {
+                        $table['PMAL']['A'] += 1;
+                        $table['TOT']['A'] += 1;
+                    }
+                    if ($data['voyRetour']) {
+                        $table['PMAL']['R'] += 1;
+                        $table['TOT']['R'] += 1;
+                    }
+            }
+        }
+
+        return $table;
+    }
+
+    public function dataGraph01(int $ent, bool $isLa, bool $isHe): int
+    {
+        $query = $this->createQueryBuilder('i')
+            ->select('count(i.id)')
+            ->where('i.entite = :ent')
+            ->setParameter('ent', $ent)
+            ->andWhere('i.listeAtt = :la')
+            ->setParameter('la', $isLa)
+            ->andWhere('i.horsEffectif = :he')
+            ->setParameter('he', $isHe)
+            ->andWhere('i.currentPlace != :et')
+            ->setParameter('et', 'insc_desist')
+        ;
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function dataGraph02(int $ent, string $etval): int
+    {
+        $query = $this->createQueryBuilder('i')
+            ->select('count(i.id)')
+            ->where('i.entite = :ent')
+            ->setParameter('ent', $ent)
+            ->andWhere('i.currentPlace = :et')
+            ->setParameter('et', $etval)
+        ;
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function extractInscList(): array
+    {
+        return $this->createQueryBuilder('i')
+            ->join('i.personne', 'p')
+            ->join('p.adresse', 'a')
+            ->select(['i.numInsc', 'i.inscritAt', 'i.entite', 'i.voyAller', 'i.voyRetour', 'p.civilite', 'p.nom',
+                'p.prenom', 'a.id', 'p.telephone', 'p.mobile', 'p.courriel', 'i.conjoint', 'p.dateNaiss', 'a.diocese', 'a.paroisse', ])
+            ->orderBy('i.numInsc', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

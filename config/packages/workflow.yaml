@@ -1,0 +1,51 @@
+# config/packages/workflow.yaml
+framework:
+    workflows:
+        wkf_inscription:
+            type: 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'method'
+                property: 'currentPlace'
+            supports:
+                - App\Entity\Inscription
+            initial_marking: insc_enreg
+            places:
+                - insc_enreg
+                - doss_envoye
+                - doss_retourne
+                - insc_valide
+                - insc_refuse
+                - insc_confirme
+                - pele_present
+                - insc_desist
+            transitions:
+                envoi_dossier:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: insc_enreg
+                    to: doss_envoye
+                retour_dossier:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: doss_envoye
+                    to: doss_retourne
+                validation_insc:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: doss_retourne
+                    to: insc_valide
+                refus_insc:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: doss_retourne
+                    to: insc_refuse
+                confirmation_insc:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: insc_valide
+                    to: insc_confirme
+                presence:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: insc_confirme
+                    to: pele_present
+                desistement:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: [doss_envoye, doss_retourne, insc_valide, insc_confirme, pele_present]
+                    to: insc_desist
