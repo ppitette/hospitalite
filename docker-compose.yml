@@ -3,13 +3,11 @@ version: '3'
 services:
 ###> doctrine/doctrine-bundle ###
   database:
-    image: 'mariadb:10.10.2'
-    container_name: hnde_database
+    image: 'mariadb:10.11'
+    container_name: hosp_database
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: main
-    networks:
-      - devel
     ports:
       - '3306'
     volumes:
@@ -17,28 +15,21 @@ services:
 ###< doctrine/doctrine-bundle ###
 
   dbadmin:
-    image: 'phpmyadmin'
-    container_name: hnde_dbadmin
+    image: 'phpmyadmin:latest'
+    container_name: hosp_dbadmin
     environment:
       PMA_HOST: database
     depends_on:
       - database
-    networks:
-      - devel
     ports:
       - 8100:80
 
 ###> symfony/mailer ###
   mailer:
     image: schickling/mailcatcher
-    container_name: hnde_mailer
+    container_name: hosp_mailer
     ports: [1025, 1080]
-    networks:
-      - devel
 ###< symfony/mailer ###
-
-networks:
-  devel:
 
 volumes:
 ###> doctrine/doctrine-bundle ###
