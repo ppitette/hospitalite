@@ -55,7 +55,7 @@ class PersonneType extends AbstractType
                 'required' => false,
             ])
             ->add('dateNaiss', DateType::class, [
-                'input' => 'datetime',
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'required' => false,
             ])
@@ -65,7 +65,7 @@ class PersonneType extends AbstractType
             ])
             ->add('dateDeces', DateType::class, [
                 'label' => false,
-                'input' => 'datetime',
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'required' => false,
             ])

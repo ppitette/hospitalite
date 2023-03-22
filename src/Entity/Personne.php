@@ -121,7 +121,7 @@ class Personne
         $age = 0;
 
         if ($this->dateNaiss) {
-            $age = $this->dateNaiss->diff(new \DateTime())->y;
+            $age = $this->dateNaiss->diff(new \DateTimeImmutable())->y;
         }
 
         return $age;
@@ -130,7 +130,7 @@ class Personne
     /**
      * Calcul de l'age à une date précisée.
      */
-    public function getAgeDate(\DateTime $date): int
+    public function getAgeDate(\DateTimeImmutable $date): int
     {
         $age = 0;
 

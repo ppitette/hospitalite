@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class PeleClotureCommand extends Command
 {
-    CONST TEST = true;
+    CONST TEST = false;
 
     public function __construct(
         private EntityManagerInterface $em,
@@ -86,29 +86,34 @@ class PeleClotureCommand extends Command
                     break;
             }
 
-            // Âge lors du pèlerinage
+            // Age lors du pèlerinage
             $participation->setAgePele($personne->getAgeDate($pelerinage->getDebut()));
+
+            // Hors effectif ?
+            $hors_effectif = false;
+            if ($inscription->isHorsEffectif()) {
+                $hors_effectif = true;
+            }
+
+            $participation->setHorsEffectif($hors_effectif);
+
+            // Voyage
+            if ($inscription->isVoyAller() && $inscription->isVoyRetour()) {
+                $participation->setVoyage('O');
+            } elseif ($inscription->isVoyAller() && !$inscription->isVoyRetour()) {
+                $participation->setVoyage('A');
+            } elseif (!$inscription->isVoyAller() && $inscription->isVoyRetour()) {
+                $participation->setVoyage('R');
+            } else {
+                $participation->setVoyage('N');
+            }
 
             if ('pele_present' != $inscription->getCurrentPlace()) {
                 // N'a pas pu participer
                 $participation->setDesist(true);
             } else {
-                // 2tait présent au pèlerinage
+                // Présent au pèlerinage
                 $participation->setDesist(false);
-
-                // Hors effectif ?
-                $participation->setHorsEffectif($inscription->isHorsEffectif());
-
-                // Voyage
-                if ($inscription->isVoyAller() && $inscription->isVoyRetour()) {
-                    $participation->setVoyage('O');
-                } elseif ($inscription->isVoyAller() && !$inscription->isVoyRetour()) {
-                    $participation->setVoyage('A');
-                } elseif (!$inscription->isVoyAller() && $inscription->isVoyRetour()) {
-                    $participation->setVoyage('R');
-                } else {
-                    $participation->setVoyage('N');
-                }
 
                 // Hébergement
                 if (!$inscription->isHebHosp()) {
