@@ -126,6 +126,10 @@ hotel:
         lib: 'Ste Agnès'
         abr: 'SAG'
         cmp: 'Blanche'
+    8:
+        lib: 'Stella'
+        abr: 'STL'
+        cmp: 'Blanche'
 
 partch:
     0:

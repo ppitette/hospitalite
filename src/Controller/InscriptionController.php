@@ -187,7 +187,7 @@ class InscriptionController extends AbstractController
 
         $workflow = $this->registry->get($inscription);
 
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
 
         switch ($transition) {
             case 'envoi_dossier':

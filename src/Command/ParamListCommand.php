@@ -28,7 +28,7 @@ class ParamListCommand extends Command
     {
         $dom = $input->getArgument('domaine');
 
-        $params = Yaml::parseFile('data/2022d.yaml');
+        $params = Yaml::parseFile('data/2023d.yaml');
 
         if ('tous' === $dom) {
             foreach ($params as $domaine => $tab) {

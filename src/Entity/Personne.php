@@ -130,7 +130,7 @@ class Personne
     /**
      * Calcul de l'age à une date précisée.
      */
-    public function getAgeDate(\DateTimeImmutable $date): int
+    public function getAgeDate($date): int
     {
         $age = 0;
 

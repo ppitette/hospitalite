@@ -29,7 +29,7 @@ class InscriptionType extends AbstractType
                 'required' => true,
             ])
             ->add('inscritAt', DateType::class, [
-                'input' => 'datetime',
+                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'required' => true,
             ])

@@ -17,7 +17,7 @@ class Parametres
         PelerinageRepository $pelerinageRepository
     ) {
         $this->paramDirectory = $paramDirectory;
-        $this->params = Yaml::parseFile($this->paramDirectory.'/2022d.yaml');
+        $this->params = Yaml::parseFile($this->paramDirectory.'/2023d.yaml');
         $this->pelerinageRepository = $pelerinageRepository;
     }
 
