@@ -103,33 +103,29 @@ hotel:
         abr: 'ACC'
         cmp: 'Rouge'
     2:
-        lib: 'Ave Maria'
-        abr: 'AVE'
-        cmp: 'Violette'
-    3:
         lib: 'Galilée Windsor'
         abr: 'GAL'
         cmp: 'Bleue'
-    4:
+    3:
         lib: 'Galilée Windsor (Lycéens)'
         abr: 'GLL'
         cmp: 'Bleue'
-    5:
+    4:
         lib: 'Métropole'
         abr: 'MET'
         cmp: 'Jaune'
-    6:
+    5:
         lib: 'National'
         abr: 'NAT'
         cmp: 'Verte'
-    7:
+    6:
         lib: 'Ste Agnès'
         abr: 'SAG'
         cmp: 'Blanche'
-    8:
-        lib: 'Stella'
+    7:
+        lib: 'Stella Matutina'
         abr: 'STL'
-        cmp: 'Blanche'
+        cmp: 'Violette'
 
 partch:
     0:
