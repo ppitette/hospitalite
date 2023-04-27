@@ -167,21 +167,22 @@ class ExportController extends AbstractController
         $sheet = $spreadsheet->getActiveSheet(0);
 
         $sheet
-            ->setCellValue('A1', 'Insc')
-            ->setCellValue('B1', 'Date')
-            ->setCellValue('C1', 'Ent')
-            ->setCellValue('D1', 'Aller')
-            ->setCellValue('E1', 'Retour')
-            ->setCellValue('F1', 'Civ')
-            ->setCellValue('G1', 'Nom')
-            ->setCellValue('H1', 'Prenom')
-            ->setCellValue('I1', 'Adresse')
-            ->setCellValue('J1', 'Fixe')
-            ->setCellValue('K1', 'Mobile')
-            ->setCellValue('L1', 'Courriel')
-            ->setCellValue('M1', 'Couple')
-            ->setCellValue('N1', 'DNaiss')
-            ->setCellValue('O1', 'Paroisse');
+            ->setCellValue('A1', 'insc')
+            ->setCellValue('B1', 'date')
+            ->setCellValue('C1', 'ent')
+            ->setCellValue('D1', 'all')
+            ->setCellValue('E1', 'ret')
+            ->setCellValue('F1', 'civ')
+            ->setCellValue('G1', 'nom')
+            ->setCellValue('H1', 'prenom')
+            ->setCellValue('I1', 'adresse')
+            ->setCellValue('J1', 'fixe')
+            ->setCellValue('K1', 'mobile')
+            ->setCellValue('L1', 'courriel')
+            ->setCellValue('M1', 'couple')
+            ->setCellValue('N1', 'naissance')
+            ->setCellValue('O1', 'paroisse')
+            ->setCellValue('P1', 'urgence');
 
         $list = $inscription->extractInscList();
 
@@ -223,6 +224,8 @@ class ExportController extends AbstractController
             if ('Diocèse d\'Évreux' !== $elem['diocese']) {
                 $sheet->setCellValue('O'.$rowCount, $elem['diocese']);
             }
+
+            $sheet->setCellValue('P'.$rowCount, $elem['personneUrgence']);
 
             ++$rowCount;
         }
