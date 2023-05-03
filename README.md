@@ -6,13 +6,18 @@ Application de gestion de la BDD de l'Hospitalité Notre Dame d'Évreux.
 
 ```bash
 cd /var/www
-sudo gh repo clone ppitette/hnde
-sudo chown -R debian:www-data hnde
+gh repo clone ppitette/hospitalite .
+sudo chown -R debian:www-data hospitalite
 cd hnde
 composer install
-yarn install
-yarn add bootstrap @fortawesome/fontawesome-free @popperjs/core
-yarn encore prod
+npm install
+
+npm install autoprefixer --save-dev
+npm install postcss-loader@^7.0.0 --save-dev
+npm install sass-loader@^13.0.0 sass --save-dev
+
+npm install bootstrap @fortawesome/fontawesome-free @popperjs/core
+nom run build
 cp .env .env.local
 ```
 
@@ -44,16 +49,17 @@ sudo chown -R debian:www-data hnde
 ```bash
 cd /var/www
 sudo chown -R debian:www-data hnde
+sudo chown -R adminsit:adminsit hospitalite
 cd hnde
 git pull
 composer install
 composer dump-env prod
 symfony console doctrine:migration:migrate
-yarn install --force
-yarn encore prod
+npm install --force
+npm run build
 symfony console cache:clear --env=prod
 cd ..
-sudo chown -R www-data:www-data hnde
+sudo chown -R www-data:www-data hospitalite
 ```
 
 ## Base de données
