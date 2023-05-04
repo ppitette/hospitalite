@@ -143,51 +143,107 @@ class InscriptionRepository extends ServiceEntityRepository
             ->getResult()
         ;
 
-        $table['HOSP']['A'] = 0;
-        $table['HOSP']['R'] = 0;
-        $table['LYCE']['A'] = 0;
-        $table['LYCE']['R'] = 0;
-        $table['PMAL']['A'] = 0;
-        $table['PMAL']['R'] = 0;
-        $table['TOT']['A'] = 0;
-        $table['TOT']['R'] = 0;
+        $table['HOSP']['TOT'] = 0;
+        $table['HOSP']['IND'] = 0;
+        $table['HOSP']['VOY'] = 0;
+        $table['HOSP']['ALL'] = 0;
+        $table['HOSP']['RET'] = 0;
+
+        $table['LYCE']['TOT'] = 0;
+        $table['LYCE']['IND'] = 0;
+        $table['LYCE']['VOY'] = 0;
+        $table['LYCE']['ALL'] = 0;
+        $table['LYCE']['RET'] = 0;
+
+        $table['PMAL']['TOT'] = 0;
+        $table['PMAL']['IND'] = 0;
+        $table['PMAL']['VOY'] = 0;
+        $table['PMAL']['ALL'] = 0;
+        $table['PMAL']['RET'] = 0;
+
+        $table['TOT']['TOT'] = 0;
+        $table['TOT']['IND'] = 0;
+        $table['TOT']['VOY'] = 0;
+        $table['TOT']['ALL'] = 0;
+        $table['TOT']['RET'] = 0;
 
         foreach ($datas as $data) {
             switch ($data['entite']) {
                 case 0:
                 case 1:
+                    $table['HOSP']['TOT'] += 1;
+                    $table['TOT']['TOT'] += 1;
                     if ($data['voyAller']) {
-                        $table['HOSP']['A'] += 1;
-                        $table['TOT']['A'] += 1;
-                    }
-                    if ($data['voyRetour']) {
-                        $table['HOSP']['R'] += 1;
-                        $table['TOT']['R'] += 1;
+                        $table['HOSP']['ALL'] += 1;
+                        $table['TOT']['ALL'] += 1;
+                        if ($data['voyRetour']) {
+                            $table['HOSP']['RET'] += 1;
+                            $table['HOSP']['VOY'] += 1;
+                            $table['TOT']['RET'] += 1;
+                            $table['TOT']['VOY'] += 1;
+                        }
+                    } else {
+                        if ($data['voyRetour']) {
+                            $table['HOSP']['RET'] += 1;
+                            $table['HOSP']['VOY'] += 1;
+                            $table['TOT']['RET'] += 1;
+                            $table['TOT']['VOY'] += 1;
+                        } else {
+                            $table['HOSP']['IND'] += 1;
+                            $table['TOT']['IND'] += 1;
+                        }
                     }
                     break;
                 case 2:
                 case 3:
+                    $table['LYCE']['TOT'] += 1;
+                    $table['TOT']['TOT'] += 1;
                     if ($data['voyAller']) {
-                        $table['LYCE']['A'] += 1;
-                        $table['TOT']['A'] += 1;
-                    }
-                    if ($data['voyRetour']) {
-                        $table['LYCE']['R'] += 1;
-                        $table['TOT']['R'] += 1;
+                        $table['LYCE']['ALL'] += 1;
+                        $table['TOT']['ALL'] += 1;
+                        if ($data['voyRetour']) {
+                            $table['LYCE']['RET'] += 1;
+                            $table['LYCE']['VOY'] += 1;
+                            $table['TOT']['RET'] += 1;
+                            $table['TOT']['VOY'] += 1;
+                        }
+                    } else {
+                        if ($data['voyRetour']) {
+                            $table['LYCE']['RET'] += 1;
+                            $table['LYCE']['VOY'] += 1;
+                            $table['TOT']['RET'] += 1;
+                            $table['TOT']['VOY'] += 1;
+                        } else {
+                            $table['LYCE']['IND'] += 1;
+                            $table['TOT']['IND'] += 1;
+                        }
                     }
                     break;
                 case 4:
+                    $table['PMAL']['TOT'] += 1;
+                    $table['TOT']['TOT'] += 1;
                     if ($data['voyAller']) {
-                        $table['PMAL']['A'] += 1;
-                        $table['TOT']['A'] += 1;
-                    }
-                    if ($data['voyRetour']) {
-                        $table['PMAL']['R'] += 1;
-                        $table['TOT']['R'] += 1;
+                        $table['PMAL']['ALL'] += 1;
+                        $table['TOT']['ALL'] += 1;
+                        if ($data['voyRetour']) {
+                            $table['PMAL']['RET'] += 1;
+                            $table['PMAL']['VOY'] += 1;
+                            $table['TOT']['RET'] += 1;
+                            $table['TOT']['VOY'] += 1;
+                        }
+                    } else {
+                        if ($data['voyRetour']) {
+                            $table['PMAL']['RET'] += 1;
+                            $table['PMAL']['VOY'] += 1;
+                            $table['TOT']['RET'] += 1;
+                            $table['TOT']['VOY'] += 1;
+                        } else {
+                            $table['PMAL']['IND'] += 1;
+                            $table['TOT']['IND'] += 1;
+                        }
                     }
             }
         }
-
         return $table;
     }
 

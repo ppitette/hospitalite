@@ -18,38 +18,48 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="content-panel">
-                            <h4><i class="fa fa-angle-right"></i> Voyage en Car</h4>
+                            <h4><i class="fa fa-angle-right"></i> Voyage</h4>
                             <div class="panel-body">
                                 <table class="table table-sm">
                                     <thead>
                                         <tr>
                                             <th scope="col"> </th>
-                                            <th scope="col">Aller</th>
-                                            <th scope="col">Retour</th>
+                                            <th scope="col" class="text-center">Total</th>
+                                            <th scope="col" class="text-center">Ind</th>
+                                            <th scope="col" class="text-center">Voy</th>
+                                            <th scope="col" class="text-center">A/R</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Hospitaliers</td>
-                                            <td>{{tabTransp.HOSP.A}}</td>
-                                            <td>{{tabTransp.HOSP.R}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pers Malades</td>
-                                            <td>{{tabTransp.PMAL.A}}</td>
-                                            <td>{{tabTransp.PMAL.R}}</td>
+                                            <td class="text-center">{{tabTransp.HOSP.TOT}}</td>
+                                            <td class="text-center">{{tabTransp.HOSP.IND}}</td>
+                                            <td class="text-center">{{tabTransp.HOSP.VOY}}</td>
+                                            <td class="text-center">{{tabTransp.HOSP.ALL}} / {{tabTransp.HOSP.RET}}</td>
                                         </tr>
                                         <tr>
                                             <td>Lycéens</td>
-                                            <td>{{tabTransp.LYCE.A}}</td>
-                                            <td>{{tabTransp.LYCE.R}}</td>
+                                            <td class="text-center">{{tabTransp.LYCE.TOT}}</td>
+                                            <td class="text-center">{{tabTransp.LYCE.IND}}</td>
+                                            <td class="text-center">{{tabTransp.LYCE.VOY}}</td>
+                                            <td class="text-center">{{tabTransp.LYCE.ALL}} / {{tabTransp.LYCE.RET}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pers Malades</td>
+                                            <td class="text-center">{{tabTransp.PMAL.TOT}}</td>
+                                            <td class="text-center">{{tabTransp.PMAL.IND}}</td>
+                                            <td class="text-center">{{tabTransp.PMAL.VOY}}</td>
+                                            <td class="text-center">{{tabTransp.PMAL.ALL}} / {{tabTransp.PMAL.RET}}</td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td>Total</td>
-                                            <td>{{tabTransp.TOT.A}}</td>
-                                            <td>{{tabTransp.TOT.R}}</td>
+                                            <td class="text-center">{{tabTransp.TOT.TOT}}</td>
+                                            <td class="text-center">{{tabTransp.TOT.IND}}</td>
+                                            <td class="text-center">{{tabTransp.TOT.VOY}}</td>
+                                            <td class="text-center">{{tabTransp.TOT.ALL}} / {{tabTransp.TOT.RET}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
