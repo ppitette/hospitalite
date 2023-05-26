@@ -17,7 +17,7 @@ npm install postcss-loader@^7.0.0 --save-dev
 npm install sass-loader@^13.0.0 sass --save-dev
 
 npm install bootstrap @fortawesome/fontawesome-free @popperjs/core
-nom run build
+npm run build
 cp .env .env.local
 ```
 
