@@ -213,7 +213,7 @@ class InscriptionController extends AbstractController
         $this->em->flush();
 
         //return $this->redirect($route);
-        switch ($inscription->getEntite) {
+        switch ($inscription->getEntite()) {
             case 0:
             case 1:
                 return $this->redirectToRoute('insc.hosp_list');
