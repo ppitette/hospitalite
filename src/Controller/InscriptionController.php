@@ -223,7 +223,7 @@ class InscriptionController extends AbstractController
                 return $this->redirectToRoute('insc.lyce_list');
                 break;
             case 4:
-                return $this->redirectToRoute('insc_pmal.list');
+                return $this->redirectToRoute('insc.pmal_list');
                 break;
             default:
         }
