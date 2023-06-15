@@ -183,7 +183,7 @@ class InscriptionController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function next(Inscription $inscription, string $transition): Response
     {
-        $route = $this->requestStack->getCurrentRequest()->headers->get('Referer');
+        // $route = $this->requestStack->getCurrentRequest()->headers->get('Referer');
 
         $workflow = $this->registry->get($inscription);
 
@@ -212,7 +212,20 @@ class InscriptionController extends AbstractController
 
         $this->em->flush();
 
-        return $this->redirect($route);
-        //return $this->redirectToRoute('insc.index');
+        //return $this->redirect($route);
+        switch ($inscription->getEntite) {
+            case 0:
+            case 1:
+                return $this->redirectToRoute('insc.hosp_list');
+                break;
+            case 2:
+            case 3:
+                return $this->redirectToRoute('insc.lyce_list');
+                break;
+            case 4:
+                return $this->redirectToRoute('insc_pmal.list');
+                break;
+            default:
+        }
     }
 }
