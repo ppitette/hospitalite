@@ -1,0 +1,4 @@
+Contact: mailto:contact@hndeorg
+Expires: 2023-08-30T22:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://www.hnde.org/.well-known/security.txt
