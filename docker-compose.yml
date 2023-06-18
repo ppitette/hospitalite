@@ -3,11 +3,11 @@ version: '3'
 services:
 ###> doctrine/doctrine-bundle ###
   database:
-    image: 'mariadb:${DB_VERSION:-10.11.2}'
+    image: 'mariadb:10.11.2'
     container_name: hosp_database
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
-      MYSQL_DATABASE: ${DB_NAME:-main}
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: main
     ports:
       - '3306'
     volumes:
