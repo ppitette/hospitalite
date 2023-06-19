@@ -129,7 +129,7 @@
         ]
     },
     "symfony/mailjet-mailer": {
-        "version": "6.2",
+        "version": "6.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",

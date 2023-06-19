@@ -55,9 +55,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/forgot-password', name: 'app.forgot_password', methods: 'GET|POST')]
-    public function sendRecoveryLink(
-        Request $request,
-    ): Response {
+    public function sendRecoveryLink(Request $request): Response {
         $form = $this->createForm(ForgotPasswordType::class);
 
         $form->handleRequest($request);
@@ -102,10 +100,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/forgot-password/{id<\d+>}/{token}', name: 'app.retrieve_credentials', methods: 'GET')]
-    public function retrieveCredentialsFromURL(
-        string $token,
-        User $user
-    ): RedirectResponse {
+    public function retrieveCredentialsFromURL(string $token, User $user): RedirectResponse {
         $this->session->set('Reset-Password-Token-URL', $token);
         $this->session->set('Reset-Password-User-Email', $user->getEmail());
 
