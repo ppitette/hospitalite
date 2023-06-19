@@ -108,10 +108,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/reset-password', name: 'app.reset_password', methods: 'GET|POST')]
-    public function resetPassword(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response {
+    public function resetPassword(Request $request, UserPasswordHasherInterface $passwordHasher): Response {
         [
             'token' => $token,
             'userEmail' => $userEmail
