@@ -136,8 +136,10 @@ class InscriptionRepository extends ServiceEntityRepository
     {
         $datas = $this->createQueryBuilder('i')
             ->select(['i.numInsc', 'i.entite', 'i.voyAller', 'i.voyRetour'])
-            ->andWhere('i.currentPlace != :et')
-            ->setParameter('et', 'insc_desist')
+            ->andWhere('i.currentPlace != :eta')
+            ->setParameter('eta', 'insc_desist')
+            ->andWhere('i.currentPlace != :etb')
+            ->setParameter('etb', 'insc_refuse')
             ->orderBy('i.numInsc', 'ASC')
             ->getQuery()
             ->getResult()
