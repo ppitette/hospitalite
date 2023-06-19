@@ -54,6 +54,7 @@ class AdresseController extends AbstractController
     }
 
     #[Route('{id<\d+>}/new', name: 'new', methods: 'GET|POST')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Personne $personne, Request $request): Response
     {
         $adresse = new Adresse();
