@@ -6,9 +6,10 @@ Application de gestion de la BDD de l'Hospitalité Notre Dame d'Évreux.
 
 ```bash
 cd /var/www
-gh repo clone ppitette/hospitalite .
-sudo chown -R debian:www-data hospitalite
-cd hnde
+gh repo clone ppitette/hospitalite
+sudo mv hospitalite hnde.org
+sudo chown -R debian:debian hnde.org
+cd hnde.org
 composer install
 npm install
 
@@ -41,15 +42,14 @@ DATABASE_URL=mysql://${DB_USER}:${DB_PASSWORD}@127.0.0.1:3306/${DB_NAME}?serverV
 composer dump-env prod
 symfony console cache:clear --env=prod
 cd ..
-sudo chown -R debian:www-data hnde
+sudo chown -R www-data:www-data hnde.org
 ```
 
 ## Migration
 
 ```bash
 cd /var/www
-sudo chown -R debian:www-data hnde
-sudo chown -R adminsit:adminsit hospitalite
+sudo chown -R debian:debian hnde.org
 cd hnde
 git pull
 composer install
@@ -59,7 +59,7 @@ npm install --force
 npm run build
 symfony console cache:clear --env=prod
 cd ..
-sudo chown -R www-data:www-data hospitalite
+sudo chown -R www-data:www-data hnde.org
 ```
 
 ## Base de données
