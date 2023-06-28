@@ -65,7 +65,8 @@ class DocumController extends AbstractController
             'paroisse' => $paroisse,
         ]);
 
-        $fileName = '../public/download/impression.docx';
+        $docum = 'doss_'.$inscription->getPersonne()->getNom().'_'.$inscription->getPersonne()->getPrenom().'.docx';
+        $fileName = '../public/download/'.$docum;
 
         $templateProcessor->saveAs($fileName);
 
@@ -112,7 +113,8 @@ class DocumController extends AbstractController
             'mobile' => $mobile,
         ]);
 
-        $fileName = '../public/download/impression.docx';
+        $docum = 'doss_'.$inscription->getPersonne()->getNom().'_'.$inscription->getPersonne()->getPrenom().'.docx';
+        $fileName = '../public/download/'.$docum;
 
         $templateProcessor->saveAs($fileName);
 
@@ -151,7 +153,8 @@ class DocumController extends AbstractController
             'mobile' => $mobile,
         ]);
 
-        $fileName = '../public/download/impression.docx';
+        $docum = 'doss_'.$inscription->getPersonne()->getNom().'_'.$inscription->getPersonne()->getPrenom().'.docx';
+        $fileName = '../public/download/'.$docum;
 
         $templateProcessor->saveAs($fileName);
 
@@ -187,7 +190,8 @@ class DocumController extends AbstractController
             'mobile' => $mobile,
         ]);
 
-        $fileName = '../public/download/impression.docx';
+        $docum = 'doss_'.$inscription->getPersonne()->getNom().'_'.$inscription->getPersonne()->getPrenom().'.docx';
+        $fileName = '../public/download/'.$docum;
 
         $templateProcessor->saveAs($fileName);
 
@@ -215,7 +219,8 @@ class DocumController extends AbstractController
             'insc' => $inscription->getNumInsc(),
         ]);
 
-        $fileName = '../public/download/impression.docx';
+        $docum = 'acpt_'.$inscription->getPersonne()->getNom().'_'.$inscription->getPersonne()->getPrenom().'.docx';
+        $fileName = '../public/download/'.$docum;
 
         $templateProcessor->saveAs($fileName);
 

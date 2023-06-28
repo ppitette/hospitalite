@@ -50,7 +50,7 @@ sudo chown -R www-data:www-data hnde.org
 ```bash
 cd /var/www
 sudo chown -R debian:debian hnde.org
-cd hnde
+cd hnde.org
 git pull
 composer install
 composer dump-env prod
