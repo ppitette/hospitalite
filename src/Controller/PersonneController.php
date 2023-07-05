@@ -3,18 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Personne;
+use App\Form\PersonneType;
+use App\Service\Parametres;
 use App\Entity\PersonneSearch;
 use App\Form\PersonneSearchType;
-use App\Form\PersonneType;
 use App\Repository\PersonneRepository;
-use App\Service\Parametres;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/personne', name: 'pers.')]
 #[IsGranted('ROLE_LECT')]

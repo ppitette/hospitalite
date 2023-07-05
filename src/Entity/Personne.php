@@ -109,6 +109,9 @@ class Personne
     public function __construct()
     {
         $this->participations = new ArrayCollection();
+        $this->pPele = 0;
+        $this->nbPele = 0;
+        $this->dPele = 0;
     }
 
     /**

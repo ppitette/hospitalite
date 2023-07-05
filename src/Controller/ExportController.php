@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use App\Repository\AdresseRepository;
-use App\Repository\InscriptionRepository;
-use App\Repository\PersonneRepository;
 use App\Service\Parametres;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use App\Repository\AdresseRepository;
+use App\Repository\PersonneRepository;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use App\Repository\InscriptionRepository;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/export', name: 'export.')]
 #[IsGranted('ROLE_ADMIN')]

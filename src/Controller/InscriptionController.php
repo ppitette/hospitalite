@@ -2,22 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\Inscription;
 use App\Entity\Personne;
+use App\Entity\Inscription;
+use App\Service\Parametres;
 use App\Form\AffectationType;
 use App\Form\InscriptionType;
-use App\Repository\InscriptionRepository;
 use App\Service\InscriptionService;
-use App\Service\Parametres;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Workflow\Registry;
+use App\Repository\InscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Workflow\Registry;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Workflow\WorkflowInterface;   
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/inscription', name: 'insc.')]
 #[IsGranted('ROLE_LECT')]

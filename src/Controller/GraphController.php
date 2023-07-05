@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\InscriptionRepository;
 use App\Service\Parametres;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\UX\Chartjs\Model\Chart;
+use App\Repository\InscriptionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
-use Symfony\UX\Chartjs\Model\Chart;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/graph', name: 'graph.')]
 #[IsGranted('ROLE_LECT')]

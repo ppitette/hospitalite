@@ -3,14 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Inscription;
-use App\Repository\InscriptionRepository;
 use App\Service\Parametres;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpWord\TemplateProcessor;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use App\Repository\InscriptionRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/docum', name: 'doc.')]
 #[IsGranted('ROLE_LECT')]

@@ -51,7 +51,6 @@ class AuthenticationSubscriber implements EventSubscriberInterface
         /** @var User $user */
         $user = $event->getToken()->getUser();
 
-        // $this->logger->notice("Utilisateur '{$user->getEmail()}' déconnecté depuis l'adresse IP '{$userIP}').'");
         $this->logger->notice('Deconnexion d\'un utilisateur ', [
             'email' => $user->getEmail(),
             'adresse IP' => $userIP

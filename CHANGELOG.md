@@ -24,4 +24,3 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 
 ### Removed
-
