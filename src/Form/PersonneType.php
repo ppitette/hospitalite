@@ -5,14 +5,15 @@ namespace App\Form;
 use App\Entity\Personne;
 use App\Service\Parametres;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class PersonneType extends AbstractType
 {
@@ -41,10 +42,10 @@ class PersonneType extends AbstractType
             ->add('prenom', TextType::class, [
                 'required' => false,
             ])
-            ->add('telephone', TextType::class, [
+            ->add('telephone', TelType::class, [
                 'required' => false,
             ])
-            ->add('mobile', TextType::class, [
+            ->add('mobile', TelType::class, [
                 'required' => false,
             ])
             ->add('lrCourriel', CheckboxType::class, [
